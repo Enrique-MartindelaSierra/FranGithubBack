@@ -210,6 +210,26 @@ public class HolaMundo {
 		System.out.println("00" + prefijo + "-" + telefono);//0034-666666666
 	}
 	
+	public static void ejercicio6() {
+		// Ejemplo para almacenar valores iniciales de variables que podrán cambiar en el código
+		int A = 1;
+		int B = 2;
+		int C = 3;
+		int D = 4;
+		int auxB = B;  // 2
+		
+		System.out.println("Valores iniciales: A = " + A + " B = " + B + " C = " + C + " D = " + D);
+		B=C;  // B = 3
+		System.out.println("B toma el valor de C -> B = " + B);
+		C=A;
+		System.out.println("C toma el valor de A -> C = " + C);
+		A=D;
+		System.out.println("A toma el valor de D -> A = " + A);
+		D=auxB;
+		System.out.println("D toma el valor de B -> D = " + D);
+	}
+	
+	
 	public static void main(String[] args) {
 		//ejemplosComentarios();
 		//ejemplosTipos1();
@@ -220,7 +240,8 @@ public class HolaMundo {
 		//ejercicio5();
 		//ejemplosIncrementosDecrementos();
 		//ejemplosConstantes();
-		conversionesNumerosCadenas();
+		//conversionesNumerosCadenas();
+		ejercicio6();
 	}
 
 }
