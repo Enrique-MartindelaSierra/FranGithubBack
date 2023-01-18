@@ -160,7 +160,54 @@ public class HolaMundo {
 	}
 
 	public static void ejercicio5() {
+		int N = 1;
+		System.out.println("Valor inicial de N = " + N);
+		//N = N + 77;  // N = 78
+		N += 77;  // N = 78
+		System.out.println("N + 77 = " + N);
+		//N = N - 3;   // N = 75
+		N -= 3;   // N = 75
+		System.out.println("N - 3 = " + N);
+		//N = N * 2;   // N = 150	
+		N *= 2;   // N = 150	
+		System.out.println("N * 2 = " + N);		
+	}
+	
+	public static void ejercicio5b() {  // No es una solución correcta
+		int N = 1;
+		System.out.println("Valor inicial de N = " + N);  // ?
+		System.out.println("N + 77 = " + (N+77));  // 78?
+		System.out.println("N - 3 = " + (N-3));	// 75 o -2 -> -2
+		System.out.println("N * 2 = " + N);		
+	}
+	
+	public static void ejemplosIncrementosDecrementos() {
+		int numero = 10;
+		// pre-incremento
+		++numero;  // 11
+		System.out.println(numero);  // 11
+		// post-incremento
+		numero++;  // 12
+		System.out.println(numero);  // 12
+		// pre-decremento
+		--numero;  // 11
+		System.out.println(numero);  // 11
+		// post-decremento
+		numero--;  // 10
+		System.out.println(numero);  // 10
 		
+		//// LO IMPORTANTE ES EL MOMENTO EN QUE INCREMENTA O DECREMENTA
+		System.out.println(++numero);  // 10 u 11 ? -> 11 y número = 11
+		System.out.println(numero++);  // 11 y número = 12
+		System.out.println(numero);  // 12
+		
+		//System.out.println(++numero+numero++); // 26 (13 + 13) y luego numero=14  // a+b = b+a
+		System.out.println(numero+++ ++numero); // 26 (13+13) y luego numero=14  // a+b = b+a
+		System.out.println(numero);  // 14
+		int numero2 = ++numero;  // numero2 = 15; numero = 15;
+		System.out.println("numero2 = " + numero2 + " numero = " + numero);
+		int numero3 = numero++;  // numero3 = 15; numero = 16;
+		System.out.println("numero2 = " + numero3 + " numero = " + numero);
 	}
 	
 	
@@ -172,7 +219,8 @@ public class HolaMundo {
 		//ejemplosBoolean();
 		//ejercicio3();
 		//tablasVerdad();
-		ejercicio5();
+		//ejercicio5();
+		ejemplosIncrementosDecrementos();
 	}
 
 }
