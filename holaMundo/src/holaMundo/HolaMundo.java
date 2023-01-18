@@ -1,6 +1,5 @@
 package holaMundo;
 
-import java.util.Scanner;
 
 /**
  * Esta es la clase inicial del curso
@@ -136,28 +135,6 @@ public class HolaMundo {
 		System.out.printf("%d y %d son iguales: %b \n",valor1,valor2,valor1==valor2); // true
 		System.out.println(valor1>=valor2); // true
 	}
-	
-	public static void algoritmoCesar() {
-		Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Ingresa el texto a codificar: ");
-        String text = scanner.nextLine();
-        System.out.print("Ingresa el desplazamiento: ");
-        int shift = scanner.nextInt();
-
-        StringBuilder encodedText = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            if (Character.isLetter(c)) {
-                int ascii = (int) c;
-                ascii += shift;
-                encodedText.append((char) ascii);
-            } else {
-                encodedText.append(c);
-            }
-        }
-
-        System.out.println("Texto codificado: " + encodedText.toString());
-	}
 
 	public static void ejercicio5() {
 		int N = 1;
@@ -205,22 +182,45 @@ public class HolaMundo {
 		System.out.println(numero+++ ++numero); // 26 (13+13) y luego numero=14  // a+b = b+a
 		System.out.println(numero);  // 14
 		int numero2 = ++numero;  // numero2 = 15; numero = 15;
-		System.out.println("numero2 = " + numero2 + " numero = " + numero);
+		System.out.println("numero2 = " + numero2 + " numero = " + numero);  // 15 y 15
 		int numero3 = numero++;  // numero3 = 15; numero = 16;
 		System.out.println("numero2 = " + numero3 + " numero = " + numero);
 	}
 	
+	public static void ejemplosConstantes() {
+		final double IVA = 0.21;
+		final double PI = 3.1416;
+		double precioVaquero = 50;
+		System.out.println("El precio final es: " + (precioVaquero * (1+IVA)));
+		//PI = 3.14159;  // daría error
+	}
+	
+	public static void conversionesNumerosCadenas() {
+		int numero = 10;
+		String cadena = "11";
+		System.out.println(cadena + numero);  // 1110
+		// Convertir cadena a número
+		System.out.println(Integer.parseInt(cadena) + numero);  // 21
+		int prefijo=34;
+		int telefono=666666666;
+		System.out.println(prefijo+telefono); // 666666700
+		System.out.println(""+prefijo+telefono); // 003466666666
+		// Convertir numero a cadena
+		System.out.println(String.valueOf(prefijo)+String.valueOf(telefono)); // 3466666666
+		System.out.println("00" + prefijo + "-" + telefono);//0034-666666666
+	}
 	
 	public static void main(String[] args) {
 		//ejemplosComentarios();
 		//ejemplosTipos1();
-		//algoritmoCesar();
 		//ejemplosString();
 		//ejemplosBoolean();
 		//ejercicio3();
 		//tablasVerdad();
 		//ejercicio5();
-		ejemplosIncrementosDecrementos();
+		//ejemplosIncrementosDecrementos();
+		//ejemplosConstantes();
+		conversionesNumerosCadenas();
 	}
 
 }
