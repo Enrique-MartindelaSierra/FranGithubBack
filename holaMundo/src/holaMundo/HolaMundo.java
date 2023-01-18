@@ -131,9 +131,9 @@ public class HolaMundo {
 	}
 	
 	public static void ejercicio3() {
-		int valor1=10, valor2=10;
-		System.out.println(valor1<valor2);  // false
-		System.out.println(valor1==valor2); // true
+		int valor1=6, valor2=6;
+		System.out.println(valor1 + " es menor que " + valor2 + ": " + (valor1<valor2));  // false
+		System.out.printf("%d y %d son iguales: %b \n",valor1,valor2,valor1==valor2); // true
 		System.out.println(valor1>=valor2); // true
 	}
 	
@@ -159,6 +159,11 @@ public class HolaMundo {
         System.out.println("Texto codificado: " + encodedText.toString());
 	}
 
+	public static void ejercicio5() {
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		//ejemplosComentarios();
 		//ejemplosTipos1();
@@ -166,7 +171,8 @@ public class HolaMundo {
 		//ejemplosString();
 		//ejemplosBoolean();
 		//ejercicio3();
-		tablasVerdad();
+		//tablasVerdad();
+		ejercicio5();
 	}
 
 }
