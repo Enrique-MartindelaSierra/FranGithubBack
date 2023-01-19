@@ -285,29 +285,30 @@ public class HolaMundo {
 	
 	public static void ejercicio15() {
 		Scanner cs = new Scanner (System.in);
+		final double IVA = 0.21;
+		// Obtención de datos
 		System.out.println("Enter the name of the product: ");
-		String product1 = cs.next();
-		cs.nextLine();
+		String product1 = cs.nextLine();
 		System.out.println("enter the value of the product: ");
-		double value1 = cs.nextDouble();
-		cs.nextLine();
-		System.out.println("Enter the name of the product: ");
-		String product2 = cs.next();
-		cs.nextLine();
-		System.out.println("enter the value of the product: ");
-		double value2 = cs.nextDouble();
+		double value1 = Double.parseDouble(cs.next().replace(',', '.'));
 		cs.nextLine();
 		System.out.println("Enter the name of the product: ");
-		String product3 = cs.next();
-		cs.nextLine();
+		String product2 = cs.nextLine();
 		System.out.println("enter the value of the product: ");
-		double value3 = cs.nextDouble();
+		double value2 = Double.parseDouble(cs.next().replace(',', '.'));
 		cs.nextLine();
+		System.out.println("Enter the name of the product: ");
+		String product3 = cs.nextLine();
+		System.out.println("enter the value of the product: ");
+		double value3 = Double.parseDouble(cs.next().replace(',', '.'));
+		cs.nextLine();
+		// Impresión de datos
 		System.out.printf("-----------------------------\n");
-		//System.out.printf("%-12s%14.2f$\n","Name_Product", "Value", "IVA");
-		System.out.printf("%-12s%14.2f$\n",product1,value1);
-		System.out.printf("%-12s%14.2f$\n",product2,value2);
-		System.out.printf("%-12s%14.2f$\n",product3,value3);
+		System.out.printf("%-15s%12s%12s\n","Name_Product", "Value", "IVA");
+		System.out.printf("%-15s%11.2f$%11.2f$\n",product1,value1,value1*(1+IVA));
+		System.out.printf("%-15s%11.2f$%11.2f$\n",product2,value2,value2*(1+IVA));
+		System.out.printf("%-15s%11.2f$%11.2f$\n",product3,value3,value3*(1+IVA));
+		cs.close();  // cerrar el Scanner
 	}
 	
 	
@@ -326,7 +327,8 @@ public class HolaMundo {
 		//ejemplosSaltos();
 		//ejemplosFormateos();
 		//ejemplosScanner();
-		ejemplosScanner2();
+		//ejemplosScanner2();
+		ejercicio15();
 	}
 
 }
