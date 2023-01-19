@@ -275,12 +275,39 @@ public class HolaMundo {
 		System.out.println("Introduzca su salario:");
 		double salario = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
-		System.out.println("Introudzca cuanto desearía ganar:");
+		System.out.println("Introduzca cuanto desearía ganar:");
 		double salarioDeseado = Double.parseDouble(sc.next().replace(',', '.'));
 		sc.nextLine();
 		System.out.println("Hola " + nombre + " me encanta " 
 				+ localidad + " y que usted gane " + salario + " y que quiera ganar " + salarioDeseado);
 		sc.close();  // cerrar el Scanner
+	}
+	
+	public static void ejercicio15() {
+		Scanner cs = new Scanner (System.in);
+		System.out.println("Enter the name of the product: ");
+		String product1 = cs.next();
+		cs.nextLine();
+		System.out.println("enter the value of the product: ");
+		double value1 = cs.nextDouble();
+		cs.nextLine();
+		System.out.println("Enter the name of the product: ");
+		String product2 = cs.next();
+		cs.nextLine();
+		System.out.println("enter the value of the product: ");
+		double value2 = cs.nextDouble();
+		cs.nextLine();
+		System.out.println("Enter the name of the product: ");
+		String product3 = cs.next();
+		cs.nextLine();
+		System.out.println("enter the value of the product: ");
+		double value3 = cs.nextDouble();
+		cs.nextLine();
+		System.out.printf("-----------------------------\n");
+		//System.out.printf("%-12s%14.2f$\n","Name_Product", "Value", "IVA");
+		System.out.printf("%-12s%14.2f$\n",product1,value1);
+		System.out.printf("%-12s%14.2f$\n",product2,value2);
+		System.out.printf("%-12s%14.2f$\n",product3,value3);
 	}
 	
 	
