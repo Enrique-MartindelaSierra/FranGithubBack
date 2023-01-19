@@ -311,6 +311,15 @@ public class HolaMundo {
 		cs.close();  // cerrar el Scanner
 	}
 	
+	public static void ejercicio7() {
+		char letra1 = 'b';
+		char letra2 = 'k';
+		System.out.println("'b' tiene la posición " + (int)letra1);
+		System.out.println("'k' tiene la posición " + (int)letra2);
+		System.out.println("La diferencia entre 'b' y 'k' es: "+ ((int)letra2-(int)letra1));		
+		System.out.println("La diferencia entre 'b' y 'k' es: "+ ((int)(letra2-letra1)));		
+	}
+	
 	
 	public static void main(String[] args) {
 		//ejemplosComentarios();
@@ -328,7 +337,8 @@ public class HolaMundo {
 		//ejemplosFormateos();
 		//ejemplosScanner();
 		//ejemplosScanner2();
-		ejercicio15();
+		//ejercicio15();
+		ejercicio7();
 	}
 
 }
