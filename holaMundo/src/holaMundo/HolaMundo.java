@@ -320,6 +320,18 @@ public class HolaMundo {
 		System.out.println("La diferencia entre 'b' y 'k' es: "+ ((int)(letra2-letra1)));		
 	}
 	
+	public static void ejercicio4() {
+		double v1=1;
+		double v2=2;
+		double v3=3;
+		double v4=4;
+		System.out.printf("%.0f ",v1);
+		System.out.print(v2 + " ");
+		System.out.print(v3 + " ");
+		System.out.print(v4 + " ");
+		System.out.println();
+		System.out.println((v1+v2)*v3/v4);		
+	}
 	
 	public static void main(String[] args) {
 		//ejemplosComentarios();
@@ -338,7 +350,8 @@ public class HolaMundo {
 		//ejemplosScanner();
 		//ejemplosScanner2();
 		//ejercicio15();
-		ejercicio7();
+		//ejercicio7();
+		ejercicio4();
 	}
 
 }

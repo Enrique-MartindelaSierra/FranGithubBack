@@ -104,50 +104,43 @@ public class Estructuras {
 
 		sc.close();
 	}
-	
+
 	public static void ejemploTernarias() {
 		int edad = 40;
-		
-		/*if(edad>=18)
-			System.out.println("Eres mayor de edad");
-		else
-			System.out.println("Eres menor de edad");*/
-		
-		System.out.println(edad>=18?"Eres mayor de edad":"Eres menor de edad");
-		
-		/*int descuento;
-		if(edad>=18) {
-			descuento=5;
-		} else {
-			descuento=20;
-		}*/
-		
-		int descuento = edad>=18?5:20;
+
+		/*
+		 * if(edad>=18) System.out.println("Eres mayor de edad"); else
+		 * System.out.println("Eres menor de edad");
+		 */
+
+		System.out.println(edad >= 18 ? "Eres mayor de edad" : "Eres menor de edad");
+
+		/*
+		 * int descuento; if(edad>=18) { descuento=5; } else { descuento=20; }
+		 */
+
+		int descuento = edad >= 18 ? 5 : 20;
 		System.out.println(descuento);
-		
-		/*int tresValores;
-		if(edad<18) {
-			tresValores=1;
-		} else if(edad>=18 && edad<=65) {
-			tresValores=2;
-		} else {
-			tresValores=3;
-		}*/
-		
-		int tresValores = edad<18?1:(edad>=18 && edad<=65)?2:3;
-		
+
+		/*
+		 * int tresValores; if(edad<18) { tresValores=1; } else if(edad>=18 && edad<=65)
+		 * { tresValores=2; } else { tresValores=3; }
+		 */
+
+		int tresValores = edad < 18 ? 1 : (edad >= 18 && edad <= 65) ? 2 : 3;
+
 		System.out.println("TresValores vale " + tresValores);
-		
+
 		int euros = 10;
-		if(euros>1) {
+		if (euros > 1) {
 			System.out.println("Cuesta " + euros + " euros");
 		} else {
 			System.out.println("Cuesta " + euros + " euro");
 		}
-		
-		System.out.println("Cuesta " + euros + " euro" + (euros!=1?"s":""));
-		System.out.println("Cuesta " + euros + (euros!=1?"euros":"euro"));
-				
+
+		System.out.println("Cuesta " + euros + " euro" + (euros != 1 ? "s" : ""));
+		System.out.println("Cuesta " + euros + (euros != 1 ? "euros" : "euro"));
+
 	}
 
 	public static void main(String[] args) {
