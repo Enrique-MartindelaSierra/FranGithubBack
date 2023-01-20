@@ -187,7 +187,7 @@ public class Estructuras {
 		int intentos = 0;
 		boolean adivina = false;
 		while(!adivina && intentos<3) {  // (adivina==false)			
-			System.out.println("Introduzca la contraseña (Quedan " + (3-intentos) + " intentos):");
+			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + (intentos!=2?"s":"") +"):");
 			String respuesta = sc.nextLine();
 			intentos++;
 			if(respuesta.equals(password)) {
@@ -196,8 +196,7 @@ public class Estructuras {
 				System.out.println("Fallaste");
 			}
 		}		
-		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");
-		
+		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");		
 		/*if(adivina) {  // (adivina==true)
 			System.out.println("Acertaste");
 		} else {
