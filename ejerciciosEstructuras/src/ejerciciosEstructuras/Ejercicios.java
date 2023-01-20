@@ -220,6 +220,27 @@ public class Ejercicios {
 		}
 		sc.close();
 	}
+	
+	/**
+	 * Muestra por pantalla los números de 20 al 1 usando un bucle while
+	 */
+	public static void ejercicio13() {
+		int numero = 20;
+		while(numero>0) {
+			System.out.println(numero);
+			numero--;  // decremento necesario para que el bucle no sea infinito.
+		}
+	}
+	public static void ejercicio13CualquierNumero() {
+		Scanner sc = new Scanner (System.in);
+		System.out.println("Introduzca el número a decrementar: ");
+		int numero = sc.nextInt();
+		while(numero>0) {
+			System.out.println(numero);
+			numero--;  // decremento necesario para que el bucle no sea infinito.
+		}
+		sc.close();
+	}
 
 	public static void main(String[] args) {
 		
@@ -229,8 +250,9 @@ public class Ejercicios {
 		//ejercicio3();
 		//ejercicio4();
 		//ejercicio5();
-		ejercicio9b();
-		System.out.println();
+		//ejercicio9b();
+		//ejercicio13();
+		ejercicio13CualquierNumero();
 	}
 
 }

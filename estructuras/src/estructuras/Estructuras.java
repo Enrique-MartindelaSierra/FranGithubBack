@@ -188,13 +188,13 @@ public class Estructuras {
 		boolean adivina = false;
 		while(!adivina && intentos<3) {  // (adivina==false)			
 			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + (intentos!=2?"s":"") +"):");
-			String respuesta = sc.nextLine();
-			intentos++;
+			String respuesta = sc.nextLine();			
 			if(respuesta.equals(password)) {
 				adivina = true;
 			} else {
 				System.out.println("Fallaste");
 			}
+			intentos++;
 		}		
 		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");		
 		/*if(adivina) {  // (adivina==true)
