@@ -3,6 +3,8 @@ package estructuras;
 import java.util.Scanner;
 
 public class Estructuras {
+	
+	public static final double IVA = 0.23;
 
 	public static void ejemploIf() {
 		Scanner sc = new Scanner(System.in);
@@ -142,6 +144,67 @@ public class Estructuras {
 		System.out.println("Cuesta " + euros + (euros != 1 ? "euros" : "euro"));
 
 	}
+	
+	public static void ejemploAmbitosVariables() {
+		int numero = 5;
+		int edad = 20;
+		
+		if(edad>18) {
+			//int numero=3;  // En Java da error
+			int valor = 4;
+			System.out.println(numero);
+		}
+		System.out.println("hola");
+		// System.out.println(valor);  // Da error porque la variable no existe fuera del if
+	}
+	
+	/**
+	 * Este programa se ejecuta hasta que el usuario adivine la contraseña
+	 */
+	public static void ejemploWhile1() {
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		String password = "1234";
+		boolean adivina = false;
+		while(!adivina) {  // (adivina==false)
+			System.out.println("Introduzca la contraseña:");
+			String respuesta = sc.nextLine();
+			if(respuesta.equals(password)) {
+				adivina = true;
+			} else {
+				System.out.println("Fallaste.\nSigue intentándolo");
+			}
+		}
+		System.out.println("Enhorabuena! acertaste.");
+		sc.close();
+	}
+	
+	/**
+	 * El programa permite adivinar la password en 3 oportunidades
+	 */
+	public static void ejemploWhile2() {
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		String password = "1234";
+		int intentos = 0;
+		boolean adivina = false;
+		while(!adivina && intentos<3) {  // (adivina==false)			
+			System.out.println("Introduzca la contraseña (Quedan " + (3-intentos) + " intentos):");
+			String respuesta = sc.nextLine();
+			intentos++;
+			if(respuesta.equals(password)) {
+				adivina = true;
+			} else {
+				System.out.println("Fallaste");
+			}
+		}		
+		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");
+		
+		/*if(adivina) {  // (adivina==true)
+			System.out.println("Acertaste");
+		} else {
+			System.out.println("Gastaste todas tus intentos");
+		}*/
+		sc.close();
+	}
 
 	public static void main(String[] args) {
 		// ejemploIf();
@@ -150,6 +213,9 @@ public class Estructuras {
 		// IfElseIfSinElse();
 		// ejemploSwitch();
 		// ejemploTernarias();
+		// ejemploAmbitosVariables();
+		//ejemploWhile1();
+		ejemploWhile2();
 	}
 
 }
