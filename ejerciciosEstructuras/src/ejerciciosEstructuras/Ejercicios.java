@@ -246,14 +246,16 @@ public class Ejercicios {
 	}
 	
 	public static void acaboCurso() {
+		int diasQuedan = 0;
 		LocalDate fecha = LocalDate.now();  // día de hoy (23/01/2023)
-		while(fecha.isBefore(LocalDate.parse("2023-03-31"))){
+		while(fecha.isBefore(LocalDate.parse("2023-03-31"))){		
 			if(fecha.getDayOfWeek()!=DayOfWeek.SATURDAY && fecha.getDayOfWeek()!=DayOfWeek.SUNDAY) {
 				System.out.println(fecha);
+				diasQuedan++;
 			}			
-			fecha = fecha.plusDays(1);
+			fecha = fecha.plusDays(1);  // fecha = fecha + 1 dia;
 		}
-		System.out.println("Has acabado el curso");
+		System.out.println("Te quedan " + diasQuedan + " días");
 	}
 
 	public static void main(String[] args) {
