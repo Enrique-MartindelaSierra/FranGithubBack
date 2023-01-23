@@ -204,6 +204,33 @@ public class Estructuras {
 		}*/
 		sc.close();
 	}
+	
+	/**
+	 * El programa permite adivinar la password en 3 oportunidades
+	 */
+	public static void ejemploDoWhile1() {
+		Scanner sc = new Scanner (System.in);  // Para leer datos por pantalla
+		String password = "1234";
+		int intentos = 0;
+		boolean adivina = false;
+		do {  		
+			System.out.println("Introduzca la contraseña (Tienes " + (3-intentos) + " intento" + (intentos!=2?"s":"") +"):");
+			String respuesta = sc.nextLine();			
+			if(respuesta.equals(password)) {
+				adivina = true;
+			} else {
+				System.out.println("Fallaste");
+			}
+			intentos++;
+		} while(!adivina && intentos<3);	
+		System.out.println(adivina?"Acertaste":"Gastaste todas tus intentos");		
+		/*if(adivina) {  // (adivina==true)
+			System.out.println("Acertaste");
+		} else {
+			System.out.println("Gastaste todas tus intentos");
+		}*/
+		sc.close();
+	}
 
 	public static void main(String[] args) {
 		// ejemploIf();
@@ -214,7 +241,8 @@ public class Estructuras {
 		// ejemploTernarias();
 		// ejemploAmbitosVariables();
 		//ejemploWhile1();
-		ejemploWhile2();
+		// ejemploWhile2();
+		ejemploDoWhile1();
 	}
 
 }

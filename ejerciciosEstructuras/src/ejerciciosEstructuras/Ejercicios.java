@@ -1,5 +1,8 @@
 package ejerciciosEstructuras;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Ejercicios {
@@ -241,6 +244,17 @@ public class Ejercicios {
 		}
 		sc.close();
 	}
+	
+	public static void acaboCurso() {
+		LocalDate fecha = LocalDate.now();  // día de hoy (23/01/2023)
+		while(fecha.isBefore(LocalDate.parse("2023-03-31"))){
+			if(fecha.getDayOfWeek()!=DayOfWeek.SATURDAY && fecha.getDayOfWeek()!=DayOfWeek.SUNDAY) {
+				System.out.println(fecha);
+			}			
+			fecha = fecha.plusDays(1);
+		}
+		System.out.println("Has acabado el curso");
+	}
 
 	public static void main(String[] args) {
 		
@@ -252,7 +266,8 @@ public class Ejercicios {
 		//ejercicio5();
 		//ejercicio9b();
 		//ejercicio13();
-		ejercicio13CualquierNumero();
+		//ejercicio13CualquierNumero();
+		acaboCurso();
 	}
 
 }
