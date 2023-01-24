@@ -454,8 +454,8 @@ public class Ejercicios {
 	public static void ejercicio21() {  // Resuelto con For
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());
-		for(int i=1;i<=numero;i++) {
+		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
+		for(int i=1;i<=numero;i++) { // 1,2,3,4,5,6,7...,18,19,20
 			if(numero%i==0) {
 				System.out.println("El número " + i + " es divisor de " + numero);
 			}
@@ -466,8 +466,37 @@ public class Ejercicios {
 	public static void ejercicio21b() {  // Resuelto con While
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());
-		
+		int numero = sc.nextInt();
+		sc.nextLine();
+		int i=1;
+		while(i<numero) {
+			if(numero%i==0) {
+				System.out.println("El número " + i + " es divisor de " + numero);
+			}
+			i++;
+		}		
+		sc.close();
+	}
+	
+	/**
+	 * Decir si un número es primo o no
+	 * Primo es si solamente es divisible por 1 y por él mismo (ej: 2,3,5,7,11,13,17...)
+	 */
+	public static void ejercicio21Primos() {  // Resuelto con For
+		int contador = 0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
+		for(int i=1;i<=numero;i++) { 
+			if(numero%i==0) {
+				contador++;
+			}
+		}	
+		if(contador==2 || numero==1) {
+			System.out.println("El número es primo");
+		} else {
+			System.out.println("El número no es primo");
+		}
 		sc.close();
 	}
 
@@ -489,7 +518,9 @@ public class Ejercicios {
 		// ejercicio13CualquierNumero();
 		// acaboCurso();
 		// imprimirHoraFecha();
-		ejercicio21();
+		// ejercicio21();
+		// ejercicio21b();
+		ejercicio21Primos();
 	}
 
 }
