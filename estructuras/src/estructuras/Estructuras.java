@@ -275,45 +275,126 @@ public class Estructuras {
 	}
 
 	public static void ejemploFor1() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) { // For estándar
 			System.out.println("Repetición número " + (i));
 		}
 	}
+
 	public static void ejemploFor1b() {
 		int i = 0;
-		for (; i < 10; ) {
+		for (; i < 10;) {
 			System.out.println("Repetición número " + (i));
 			i++;
 		}
 	}
+
+	public static void ejemploForaWhile() {
+		int i = 0;
+		while (i < 10) {
+			System.out.println("Repetición número " + (i));
+			i++;
+		}
+	}
+
 	public static void ejemploFor1c() {
 		for (int i = 0; i < 10; ++i) {
 			System.out.println("Repetición número " + (i));
 		}
 	}
-	public static void ejemploForaWhile() {
-		int i=0;
-		while(i<10) {
+
+	public static void ejemploFor1d() {
+		for (int i = 0; i < 10; i = i + 1) {
 			System.out.println("Repetición número " + (i));
-			i++;
-		}		
+		}
 	}
-	
-	public static void ejemploFor2() {  // Bucle infinito
+
+	public static void ejemploFor1e() {
+		for (int i = 0; i < 10; i += 1) {
+			System.out.println("Repetición número " + (i));
+		}
+	}
+
+	public static void ejemploFor2() { // Bucle infinito
 		for (;;) {
 			System.out.println("Repetición número ");
 		}
 	}
-	
-	public static void ejemploFor3() {  
-		for (int i=10;i>0;i--) {
+
+	public static void ejemploFor3() { // For hacia atrás
+		for (int i = 10; i > 0; i--) {
 			System.out.println("Repetición número " + i);
 		}
 	}
-	
-	public static void ejemploFor4() {  
-		for (int i = 0;i<1000;i=i+2) {
+
+	public static void ejemploFor4() { // For con salto de más de 1
+
+		for (int i = 0; i < 1000; i = i + 2) {
 			System.out.println("Valor de i= " + i);
+		}
+
+	}
+
+	public static void ejemploBreak() {
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i < 5; i++) {
+			System.out.println("Introduzca la contraseña:");
+			String password = sc.nextLine();
+			if (password.contains("kk")) {
+				break; // Si encuentra una palabra con kk ya no ejecuta más el bucle
+			}
+			System.out.println("Gracias por introducir su contraseña.");
+		}
+		sc.close();
+	}
+
+	public static void ejemploContinue() {
+		Scanner sc = new Scanner(System.in);
+		for (int i = 0; i < 5; i++) {
+			System.out.println("Introduzca la contraseña:");
+			String password = sc.nextLine();
+			if (password.contains("kk")) {
+				continue; // Si encuentra una palabra con kk siempre ejecuta todo el bucle, pero no lo que
+							// queda detrás del continue en esa iteración
+			}
+			// No se ejecuta si se ha ejecutado el continue
+			System.out.println("Gracias por introducir su contraseña.");
+		}
+		sc.close();
+	}
+
+	/**
+	 * Vemos las tablas del 1 al 5 con sus 10 números
+	 */
+	public static void ejemploForAnidadosTablasMultiplicar() {
+		for (int tabla = 1; tabla <= 5; tabla++) {
+			for (int num = 1; num <= 10; num++) {
+				System.out.println(tabla + " x " + num + " = " + (tabla * num));
+			}
+		}
+	}
+	
+	/**
+	 * Vemos las tablas del 1 al 5 con sus 10 números, pero además con una cabecera por cada tabla
+	 */
+	public static void ejemploForAnidadosTablasMultiplicarB() {
+		for (int tabla = 1; tabla <= 5; tabla++) {
+			System.out.println("Comienzo de la tabla del " + tabla);
+			for (int num = 1; num <= 10; num++) {
+				System.out.println(tabla + " x " + num + " = " + (tabla * num));
+			}
+		}
+	}
+	
+	/**
+	 * Vemos las tablas del 1 al 5 con sus 10 números, pero además con una cabecera y un fin por cada tabla
+	 */
+	public static void ejemploForAnidadosTablasMultiplicarC() {
+		for (int tabla = 1; tabla <= 5; tabla++) {
+			System.out.println("Comienzo de la tabla del " + tabla);
+			for (int num = 1; num <= 10; num++) {
+				System.out.println(tabla + " x " + num + " = " + (tabla * num));
+			}
+			System.out.println("Fin de la tabla del " + tabla);
 		}
 	}
 
@@ -331,10 +412,14 @@ public class Estructuras {
 		// ejemploDoWhile2();
 		// offTopicBloqueTexto();
 		// ejemploFor1();
-		ejemploFor1c();
+		// ejemploFor1c();
 		// ejemploFor2();
 		// ejemploFor3();
 		// ejemploFor4();
+		// ejemploContinue();
+		// ejemploForAnidadosTablasMultiplicar();
+		// ejemploForAnidadosTablasMultiplicarB();
+		ejemploForAnidadosTablasMultiplicarC();
 	}
 
 }

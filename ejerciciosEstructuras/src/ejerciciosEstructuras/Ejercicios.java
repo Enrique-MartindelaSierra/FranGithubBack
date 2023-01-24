@@ -483,21 +483,73 @@ public class Ejercicios {
 	 * Primo es si solamente es divisible por 1 y por él mismo (ej: 2,3,5,7,11,13,17...)
 	 */
 	public static void ejercicio21Primos() {  // Resuelto con For
+		int vecesFor = 0;
 		int contador = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
 		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
 		for(int i=1;i<=numero;i++) { 
+			vecesFor++;
 			if(numero%i==0) {
 				contador++;
 			}
 		}	
+		System.out.println("El bucle for se ejecuta: " + vecesFor);
 		if(contador==2 || numero==1) {
 			System.out.println("El número es primo");
 		} else {
 			System.out.println("El número no es primo");
 		}
 		sc.close();
+	}
+	
+	public static void ejercicio21PrimosConBooleano() {
+		int contador=0;// Resuelto con For
+		boolean esPrimo = true;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
+		for(int i=2;i<numero/2 && esPrimo;i++) {
+			contador++;
+			if(numero%i==0) {
+				esPrimo=false;
+			}
+		}	
+		System.out.println("El bucle for se ejecuta: " + contador);
+		if(esPrimo) {
+			System.out.println("El número es primo");
+		} else {
+			System.out.println("El número no es primo");
+		}
+		sc.close();
+	}
+	
+	public static void ejercicio21PrimosConBreak() {
+		int contador=0;// Resuelto con For
+		boolean esPrimo = true;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
+		for(int i=2;i<numero/2;i++) {
+			contador++;
+			if(numero%i==0) {
+				esPrimo=false;
+				break;  // No recomendable salvo excepciones
+			}
+		}	
+		System.out.println("El bucle for se ejecuta: " + contador);
+		if(esPrimo) {
+			System.out.println("El número es primo");
+		} else {
+			System.out.println("El número no es primo");
+		}
+		sc.close();
+	}
+	
+	public static void ejemploForComplejo() {
+		for (int i = 0, j = 10; i <= 10 && j > 5; i++, j--) { // 0+10, 1+9, 2+8, 3+7, 4+6
+			System.out.println(i + " + " + j + " = " + (i + j));
+		}
 	}
 
 	public static void main(String[] args) {
@@ -520,7 +572,9 @@ public class Ejercicios {
 		// imprimirHoraFecha();
 		// ejercicio21();
 		// ejercicio21b();
-		ejercicio21Primos();
+		// ejercicio21Primos();
+		//ejercicio21PrimosConBooleano();
+		ejemploForComplejo();
 	}
 
 }
