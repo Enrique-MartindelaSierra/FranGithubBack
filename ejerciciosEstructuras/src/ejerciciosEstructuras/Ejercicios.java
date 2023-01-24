@@ -446,6 +446,30 @@ public class Ejercicios {
 		// Java 5
 		Date fechaJava5 = new Date();  // huid
 	}
+	
+	/**
+	 * Pide al usuario un número y dile los divisores de dicho número 
+	 * (resto da cero).
+	 */
+	public static void ejercicio21() {  // Resuelto con For
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		int numero = Integer.parseInt(sc.nextLine());
+		for(int i=1;i<=numero;i++) {
+			if(numero%i==0) {
+				System.out.println("El número " + i + " es divisor de " + numero);
+			}
+		}		
+		sc.close();
+	}
+	
+	public static void ejercicio21b() {  // Resuelto con While
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		int numero = Integer.parseInt(sc.nextLine());
+		
+		sc.close();
+	}
 
 	public static void main(String[] args) {
 
@@ -464,7 +488,8 @@ public class Ejercicios {
 		// ejercicio13();
 		// ejercicio13CualquierNumero();
 		// acaboCurso();
-		imprimirHoraFecha();
+		// imprimirHoraFecha();
+		ejercicio21();
 	}
 
 }
