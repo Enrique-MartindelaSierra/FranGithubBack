@@ -151,7 +151,7 @@ public class Ejercicios {
 		}
 		sc.close();
 	}
-	
+
 	public static void ejercicio7bErroresPersonalizados() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca las horas (0-23):");
@@ -163,16 +163,16 @@ public class Ejercicios {
 		int segundos = Integer.parseInt(sc.nextLine());
 		if (horas < 0 || horas > 23) {
 			System.out.println("Ha introducido una hora errónea");
-		} else if(minutos < 0 || minutos > 59) {
+		} else if (minutos < 0 || minutos > 59) {
 			System.out.println("Ha introducido los minutos erróneos");
-		} else if (segundos < 0 || segundos > 59){
-			System.out.println("Ha introducido los segundos erróneos");			
+		} else if (segundos < 0 || segundos > 59) {
+			System.out.println("Ha introducido los segundos erróneos");
 		} else {
 			System.out.printf("Hora: %02d:%02d:%02d\n", horas, minutos, segundos);
 		}
 		sc.close();
 	}
-	
+
 	public static void ejercicio7bErroresMultiplesPersonalizados() {
 		boolean error = false;
 		Scanner sc = new Scanner(System.in);
@@ -186,16 +186,16 @@ public class Ejercicios {
 		if (horas < 0 || horas > 23) {
 			System.out.println("Ha introducido una hora errónea");
 			error = true;
-		} 
-		if(minutos < 0 || minutos > 59) {
+		}
+		if (minutos < 0 || minutos > 59) {
 			System.out.println("Ha introducido los minutos erróneos");
 			error = true;
-		} 
-		if (segundos < 0 || segundos > 59){
+		}
+		if (segundos < 0 || segundos > 59) {
 			System.out.println("Ha introducido los segundos erróneos");
 			error = true;
-		} 		
-		if(!error){
+		}
+		if (!error) {
 			System.out.printf("Hora: %02d:%02d:%02d\n", horas, minutos, segundos);
 		}
 		sc.close();
@@ -434,7 +434,7 @@ public class Ejercicios {
 		}
 		System.out.println("Te quedan " + diasQuedan + " días");
 	}
-	
+
 	public static void imprimirHoraFecha() {
 		// Java 8
 		LocalDate fecha = LocalDate.now();
@@ -444,112 +444,154 @@ public class Ejercicios {
 		System.out.println(hora);
 		System.out.println(fechaHora);
 		// Java 5
-		Date fechaJava5 = new Date();  // huid
+		Date fechaJava5 = new Date(); // huid
 	}
-	
+
 	/**
-	 * Pide al usuario un número y dile los divisores de dicho número 
-	 * (resto da cero).
+	 * Pide al usuario un número y dile los divisores de dicho número (resto da
+	 * cero).
 	 */
-	public static void ejercicio21() {  // Resuelto con For
+	public static void ejercicio21() { // Resuelto con For
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
-		for(int i=1;i<=numero;i++) { // 1,2,3,4,5,6,7...,18,19,20
-			if(numero%i==0) {
+		int numero = Integer.parseInt(sc.nextLine()); // Para coger un número y asignarlo a una variable
+		for (int i = 1; i <= numero; i++) { // 1,2,3,4,5,6,7...,18,19,20
+			if (numero % i == 0) {
 				System.out.println("El número " + i + " es divisor de " + numero);
 			}
-		}		
+		}
 		sc.close();
 	}
-	
-	public static void ejercicio21b() {  // Resuelto con While
+
+	public static void ejercicio21b() { // Resuelto con While
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
 		int numero = sc.nextInt();
 		sc.nextLine();
-		int i=1;
-		while(i<numero) {
-			if(numero%i==0) {
+		int i = 1;
+		while (i < numero) {
+			if (numero % i == 0) {
 				System.out.println("El número " + i + " es divisor de " + numero);
 			}
 			i++;
-		}		
+		}
 		sc.close();
 	}
-	
+
 	/**
-	 * Decir si un número es primo o no
-	 * Primo es si solamente es divisible por 1 y por él mismo (ej: 2,3,5,7,11,13,17...)
+	 * Decir si un número es primo o no Primo es si solamente es divisible por 1 y
+	 * por él mismo (ej: 2,3,5,7,11,13,17...)
 	 */
-	public static void ejercicio21Primos() {  // Resuelto con For
+	public static void ejercicio21Primos() { // Resuelto con For
 		int vecesFor = 0;
 		int contador = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
-		for(int i=1;i<=numero;i++) { 
+		int numero = Integer.parseInt(sc.nextLine()); // Para coger un número y asignarlo a una variable
+		for (int i = 1; i <= numero; i++) {
 			vecesFor++;
-			if(numero%i==0) {
+			if (numero % i == 0) {
 				contador++;
 			}
-		}	
+		}
 		System.out.println("El bucle for se ejecuta: " + vecesFor);
-		if(contador==2 || numero==1) {
+		if (contador == 2 || numero == 1) {
 			System.out.println("El número es primo");
 		} else {
 			System.out.println("El número no es primo");
 		}
 		sc.close();
 	}
-	
+
 	public static void ejercicio21PrimosConBooleano() {
-		int contador=0;// Resuelto con For
+		int contador = 0;// Resuelto con For
 		boolean esPrimo = true;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
-		for(int i=2;i<numero/2 && esPrimo;i++) {
+		int numero = Integer.parseInt(sc.nextLine()); // Para coger un número y asignarlo a una variable
+		for (int i = 2; i < numero / 2 && esPrimo; i++) {
 			contador++;
-			if(numero%i==0) {
-				esPrimo=false;
+			if (numero % i == 0) {
+				esPrimo = false;
 			}
-		}	
+		}
 		System.out.println("El bucle for se ejecuta: " + contador);
-		if(esPrimo) {
+		if (esPrimo) {
 			System.out.println("El número es primo");
 		} else {
 			System.out.println("El número no es primo");
 		}
 		sc.close();
 	}
-	
+
 	public static void ejercicio21PrimosConBreak() {
-		int contador=0;// Resuelto con For
+		int contador = 0;// Resuelto con For
 		boolean esPrimo = true;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Introduzca un número");
-		int numero = Integer.parseInt(sc.nextLine());  // Para coger un número y asignarlo a una variable
-		for(int i=2;i<numero/2;i++) {
+		int numero = Integer.parseInt(sc.nextLine()); // Para coger un número y asignarlo a una variable
+		for (int i = 2; i < numero / 2; i++) {
 			contador++;
-			if(numero%i==0) {
-				esPrimo=false;
-				break;  // No recomendable salvo excepciones
+			if (numero % i == 0) {
+				esPrimo = false;
+				break; // No recomendable salvo excepciones
 			}
-		}	
+		}
 		System.out.println("El bucle for se ejecuta: " + contador);
-		if(esPrimo) {
+		if (esPrimo) {
 			System.out.println("El número es primo");
 		} else {
 			System.out.println("El número no es primo");
 		}
 		sc.close();
 	}
-	
+
 	public static void ejemploForComplejo() {
 		for (int i = 0, j = 10; i <= 10 && j > 5; i++, j--) { // 0+10, 1+9, 2+8, 3+7, 4+6
 			System.out.println(i + " + " + j + " = " + (i + j));
 		}
+	}
+
+	/**
+	 * Muestra de 5 en 5, los números del 0 al 100.
+	 */
+	public static void ejercicio18() {
+		for (int i = 0; i <= 100; i++) { // Voy del 0 al 100
+			if (i % 5 == 0) { // compruebo que sea múltiplo de 5
+				System.out.println(i);
+			}
+		}
+	}
+
+	public static void ejercicio18B() {
+		for (int i = 0; i <= 100; i += 5) { // i = i + 5 => i+=5
+			System.out.println(i);
+		}
+	}
+
+	public static void ejercicio18C() { // While
+		int i = 0;
+		while (i <= 100) {
+			System.out.println(i);
+			i += 5;
+		}
+	}
+
+	/**
+	 * Pregunta al usuario un número y muestra del 1 hasta ese número, en una misma
+	 * línea, separados por comas (debes comprobar cuando es el último y no poner
+	 * una coma en ese caso). 
+	 * Dime un número: 7 
+	 * 1,2,3,4,5,6,7
+	 */
+	public static void ejercicio19() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Dime un número: ");
+		int numero = Integer.parseInt(sc.nextLine());
+		for (int i = 1; i <= numero; i++) {
+			System.out.print(i + ((i != numero) ? "," : ""));
+		}
+		sc.close();
 	}
 
 	public static void main(String[] args) {
@@ -573,8 +615,11 @@ public class Ejercicios {
 		// ejercicio21();
 		// ejercicio21b();
 		// ejercicio21Primos();
-		//ejercicio21PrimosConBooleano();
-		ejemploForComplejo();
+		// ejercicio21PrimosConBooleano();
+		// ejemploForComplejo();
+		// ejercicio18();
+		// ejercicio18B();
+		ejercicio19();
 	}
 
 }
