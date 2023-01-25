@@ -144,7 +144,7 @@ public class MiArrays {
 			System.out.println(alumno);
 		}
 		// Ahora con números
-		int[] numeros = {11,2,4,5,3,21,80};
+		Integer[] numeros = {11,2,4,5,3,21,80};  // Integer es la clase Wrapper de int, Boxing
 		Arrays.sort(numeros);  // De menor a mayor
 		for(int numero : numeros) {  // forEach
 			System.out.println(numero);
@@ -171,7 +171,7 @@ public class MiArrays {
 		// ejemploStringJoin();
 		// eliminarUnElementoArray();
 		// ordenarArray();
-		ordenarInverso();
+		// ordenarInverso();
 	}
 
 }
