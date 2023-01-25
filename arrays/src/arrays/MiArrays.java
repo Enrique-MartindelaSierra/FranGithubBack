@@ -154,6 +154,21 @@ public class MiArrays {
 			System.out.println(numero);
 		}
 	}
+	
+	public static void clasesEnvolventes() {  // Wrappers
+		// int -> Integer
+		Integer numero;
+		// double -> Double
+		Double decimal;
+		// float -> Float
+		Float decimal2;
+		// char -> Character
+		Character letra;
+		// boolean -> Boolean
+		Boolean booleano;
+		// String ya es una clase, no tiene Wrapper
+		String cadena;	
+	}
 
 	public static void main(String[] args) {
 		// ejemploDeclaraciones();
