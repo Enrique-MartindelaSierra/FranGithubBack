@@ -593,6 +593,20 @@ public class Ejercicios {
 		}
 		sc.close();
 	}
+	
+	public static void ejercicio19B() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Dime un número: ");
+		int numero = Integer.parseInt(sc.nextLine());
+		for (int i = 1; i <= numero; i++) {
+			if(i!=numero) {  // Si no es el último
+				System.out.print(i+",");
+			} else {  // Si es el último
+				System.out.print(i);
+			}			
+		}
+		sc.close();
+	}
 
 	public static void main(String[] args) {
 
