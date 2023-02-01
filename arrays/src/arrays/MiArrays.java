@@ -167,7 +167,7 @@ public class MiArrays {
 		// boolean -> Boolean
 		Boolean booleano;
 		// String ya es una clase, no tiene Wrapper
-		String cadena;	
+		String cadena;
 	}
 
 	public static void main(String[] args) {
