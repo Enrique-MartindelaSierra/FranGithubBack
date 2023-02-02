@@ -113,19 +113,21 @@ public class Ejemplos {
 		System.out.println(cad1.compareTo(cad3)); // 32
 		System.out.println(cad1.compareToIgnoreCase(cad3)); // 8
 		
-		String s = "Mi perro se llama Comeniños";
+		String s = "Mi perro se llama Comeniños perro";
 		System.out.println(s.indexOf("perro")); // 3
 		System.out.println(s.indexOf("gato")); // -1 Valores no encontrados
+		System.out.println(s.indexOf("perro",4)); // -1 no la encuentra
 		
 	}
 	
 	
 	public static void buscarArrayInteger() {
-		int[] numeros = {5,9,14,7,2};
-		boolean encontrado = Arrays.stream(numeros).anyMatch(e->e==5);
-		boolean encontrado2 = Arrays.stream(numeros).anyMatch(e->e==8);
+		Integer[] numeros = {5,9,14,7,2};
+		boolean encontrado = Arrays.stream(numeros).anyMatch(e->e==5);  // true
+		boolean encontrado2 = Arrays.stream(numeros).anyMatch(e->e==8); // false
 		System.out.println(encontrado);
 		System.out.println(encontrado2);
+		System.out.println(Arrays.asList(numeros).indexOf(14));  // posición
 	}
 	
 	public static void main(String[] args) {
@@ -168,7 +170,7 @@ public class Ejemplos {
 		
 		ejemplosMath();
 		ejemplosString();
-		buscarArrayInteger();
+		//buscarArrayInteger();
 		
 	}
 
