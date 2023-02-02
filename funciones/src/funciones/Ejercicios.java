@@ -93,6 +93,10 @@ public class Ejercicios {
 		return Arrays.stream(numeros).max().orElse(0);
 	}
 	
+	public static int ejercicio9(String cadena, String subcadena) {
+		return 4;
+	}
+	
 	public static void main(String[] args) {
 		// Ejercicio 6
 		/*double[] numeros = {12.45,14.18,25.94};
@@ -104,7 +108,7 @@ public class Ejercicios {
 		double otraMedia = media(numeros);
 		System.out.println(otraMedia);*/
 		
-		ejercicio7();
+		//ejercicio7();
 		
 		// Ejercicio 8
 		/*int maximo = ejercicio8(2,8,99,4,1000,9,8);
@@ -115,6 +119,10 @@ public class Ejercicios {
 		System.out.println(ejercicio8funcional());  // 0
 		System.out.println(ejercicio8funcional(-2,-3,-10));  // -2
 		*/
+		
+		int veces = ejercicio9("cocinando cocos con chocolate","co");  // debe devolver 4
+		System.out.println(veces);  // debe imprimir 4
+		
 	}
 
 }

@@ -113,10 +113,10 @@ public class Ejemplos {
 		System.out.println(cad1.compareTo(cad3)); // 32
 		System.out.println(cad1.compareToIgnoreCase(cad3)); // 8
 		
-		String s = "Mi perro se llama Comeniños perro";
+		String s = "Mi perro se llama Comeniños";
 		System.out.println(s.indexOf("perro")); // 3
 		System.out.println(s.indexOf("gato")); // -1 Valores no encontrados
-		System.out.println(s.indexOf("perro",4)); // -1 no la encuentra
+		System.out.println(s.indexOf("perro",4)); // -1 no la encuentra más
 		
 	}
 	
