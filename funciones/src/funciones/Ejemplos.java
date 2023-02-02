@@ -118,6 +118,21 @@ public class Ejemplos {
 		System.out.println(s.indexOf("gato")); // -1 Valores no encontrados
 		System.out.println(s.indexOf("perro",4)); // -1 no la encuentra más
 		
+		String s4 = "Mi perro se llama Comeniños";
+		System.out.println(s4.contains("perro")); // true
+		System.out.println(s4.contains("gato")); // false
+		
+		String s5 = "Mi perro se llama Comeniños y mi perrose también";
+		String s6 = s5.replace("perro", "koalaaaaaa");
+		System.out.println(s6); // Mi koalaaaaaa se llama Comeniños y mi koalaaaaaase también
+		
+		String s7 = "HOLAAAAA";
+		System.out.println(s7.toLowerCase()); // holaaaaa
+		System.out.println(s7.toUpperCase()); // HOLAAAAA
+		
+		String cuenta =  "111;Fran;27/07/1976;ES;10000";
+		String[] partes = cuenta.split(";");  // partes[0] = "111", partes[1]="Fran"...
+		System.out.println(partes[1] + " tiene " + partes[4] + " euros");
 	}
 	
 	
