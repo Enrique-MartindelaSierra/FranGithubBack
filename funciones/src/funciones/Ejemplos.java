@@ -1,5 +1,7 @@
 package funciones;
 
+import java.util.Arrays;
+
 public class Ejemplos {
 	
 	public static void imprimirHola() {
@@ -66,8 +68,66 @@ public class Ejemplos {
 		valores[0]++;
 	}
 	
-	
+	public static void ejemplosMath() {
+		double n1 = -23.40;
+		double n2 = 2.449532;
 
+		System.out.println(Math.abs(n1)); // 23.4 El número siempre en positivo
+		System.out.println(Math.round(n2)); // 2
+		System.out.println(Math.round(n1)); // -23
+		System.out.println(Math.ceil(n2)); // 3 Redondea hacia arriba siempre
+		System.out.println(Math.ceil(n1)); // -23
+		System.out.println(Math.floor(n2)); // 2 Redondea hacia abajo siempre
+		System.out.println(Math.floor(n1)); // -24
+		System.out.println(Math.max(23, 43)); // 43
+		System.out.println(Math.min(4, 5)); // 4
+		System.out.println(Math.sqrt(25)); // 5
+		System.out.println(Math.pow(3, 2)); // 9
+		System.out.println(Math.pow(3, 3)); // 27
+
+	}
+
+	
+	public static void ejemplosString() {
+		String s1 = "abc";
+		String s2 = "def";
+		String s3 = "ghi";
+		String concatenada = s1.concat(s2).concat(s3);
+		String concatenada2 = s1 + s2 + s3;
+		System.out.println(concatenada); // abcdefghi
+		System.out.println(concatenada2); // abcdefghi
+		s1.concat(s2).concat(s3);  // s1 => abcdefghi? NO
+		System.out.println(s1);  // abc
+		s1 = s1.concat(s2).concat(s3);  // s1 => abcdefghi? SI
+		System.out.println(s1);  // abcdefghi
+		
+		String[] nombres = {"Paco", "Pepa", "Dani"};
+		String nombresJuntos = String.join(", ", nombres);
+		System.out.println(String.join(", ", nombres));
+		System.out.println(nombresJuntos);
+		
+		String cad1 = "alicante";
+		String cad2 = "dani";
+		String cad3 = "Alava";
+		System.out.println(cad1.compareTo(cad2)); // -3
+		System.out.println(cad1.compareTo(cad3)); // 32
+		System.out.println(cad1.compareToIgnoreCase(cad3)); // 8
+		
+		String s = "Mi perro se llama Comeniños";
+		System.out.println(s.indexOf("perro")); // 3
+		System.out.println(s.indexOf("gato")); // -1 Valores no encontrados
+		
+	}
+	
+	
+	public static void buscarArrayInteger() {
+		int[] numeros = {5,9,14,7,2};
+		boolean encontrado = Arrays.stream(numeros).anyMatch(e->e==5);
+		boolean encontrado2 = Arrays.stream(numeros).anyMatch(e->e==8);
+		System.out.println(encontrado);
+		System.out.println(encontrado2);
+	}
+	
 	public static void main(String[] args) {
 		if(args.length>0)
 			System.out.println(args[0]);
@@ -105,6 +165,10 @@ public class Ejemplos {
 		int[] var1ref = {var1};  // {5}
 		parametrosReferencia(var1ref); // {6}
 		System.out.println(var1ref[0]); // 6
+		
+		ejemplosMath();
+		ejemplosString();
+		buscarArrayInteger();
 		
 	}
 
