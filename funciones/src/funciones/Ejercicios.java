@@ -1,6 +1,7 @@
 package funciones;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -139,6 +140,15 @@ public class Ejercicios {
 		return veces;
 	}
 	
+	/**
+	 * Crea una función que reciba un array de cadenas y te lo devuelva ordenado
+	 * alfabéticamente de la ‘z’ a la ‘a’
+	 */
+	public static void ejercicio12(String[] cadenas) {
+		//Arrays.sort(cadenas);  // Orden ascendente y se modifica fuera del método
+		Arrays.sort(cadenas, Comparator.reverseOrder());  // orden descendente
+	}
+	
 	public static void main(String[] args) {
 		// Ejercicio 6
 		/*double[] numeros = {12.45,14.18,25.94};
@@ -170,6 +180,12 @@ public class Ejercicios {
 		System.out.println(ejercicio9b("cocinando cococos con chococolate","coco"));  // 3
 		System.out.println(ejercicio9c("cocinando cococos con chococolate","coco"));  // 2
 		
+		String[] meses = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+		ejercicio12(meses);  // meses se modifica el orden dentro del método
+		for(String mes: meses) {
+			System.out.println(mes);
+		}
+		System.out.println(Arrays.toString(meses));
 	}
 
 }
