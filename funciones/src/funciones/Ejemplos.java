@@ -57,6 +57,15 @@ public class Ejemplos {
 		return resultado;
 	}
 	
+	public static void parametrosValor(int numero, int numero2) {
+		numero++;
+		numero2++;
+	}
+	
+	public static void parametrosReferencia(int[] valores) {
+		valores[0]++;
+	}
+	
 	
 
 	public static void main(String[] args) {
@@ -87,6 +96,16 @@ public class Ejemplos {
 		} else {
 			System.out.println("La suma no es mayor que 10");
 		}
+		
+		int var1=5;
+		int var2=10;
+		parametrosValor(var1, var2);
+		System.out.println("Var1: " + var1 + " Var2: " + var2);  // 6 y 11 - 5 y 10? => 5 y 10
+		
+		int[] var1ref = {var1};  // {5}
+		parametrosReferencia(var1ref); // {6}
+		System.out.println(var1ref[0]); // 6
+		
 	}
 
 }
