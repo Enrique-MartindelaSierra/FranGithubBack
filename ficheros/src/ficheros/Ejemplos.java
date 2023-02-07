@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Esta clase muestra ejemplos relacionados con el acceso a ficheros
@@ -85,18 +86,43 @@ public class Ejemplos {
 			return lineas;
 		} catch (IOException e) {
 			//e.printStackTrace();
-			System.out.println("No se puede acceder al fichero");
+			System.out.println("No se puede acceder al fichero. Error en devolverLineasJava8");
 			return null;
 		}
+	}
+	
+	public static int controlarDivisionEntera(int numerador,int denominador) {
+		try {
+			int resultado = numerador/denominador;
+			return resultado;
+		} catch (Exception e) {
+			System.out.println("No se puede dividir por cero");
+			return 0;
+		}
+	}
+	
+	public static void leerEImprimir() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca un número");
+		try {
+			int numero = Integer.parseInt(sc.nextLine());  // Coge un número
+			System.out.println(numero);
+		} catch (NumberFormatException e) {
+			System.out.println("No ha introducido un número correcto");
+		}  // Imprime el número
+		sc.close();
 	}
 
 	public static void main(String[] args) throws IOException  {
 		//leerFicheroJava5("C:\\ficheros\\alumnos.txt");
 		//leerFicheroJava8("C:\\ficheros\\alumnos.txt");
 		//leerFicheroJava8(Paths.get("datos","alumnos.txt"));  // Llamada con ruta relativa independiente del Sistema Operativo		
-		List<String> datosDevueltos = devolverLineasJava8(Paths.get("C:\\ficheros\\alumnos.txt"));
+		List<String> datosDevueltos = devolverLineasJava8(Paths.get("C:\\ficheros\\alumnos10.txt"));
 		if(datosDevueltos!=null)
 			datosDevueltos.forEach(e->System.out.println(e));
+		System.out.println(controlarDivisionEntera(10, 0));
+		leerEImprimir();
+		System.out.println("Fin del programa");
 	}
 
 }
