@@ -1,0 +1,5 @@
+Pepito;6,75
+Marta;5,60
+Marcos;7,35
+Antonio;3,50
+Margarita;8,45
