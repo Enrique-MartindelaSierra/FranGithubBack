@@ -18,13 +18,13 @@ public class Ejercicios {
 	public static void ejercicio2(String nombreFichero) {
 		Scanner sc = new Scanner(System.in);
 		String linea;
-		try {
+		try {  // Esto crea el fichero vacío
 			Files.writeString(Paths.get(nombreFichero), "");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		do {
+		do { // aquí vamos añadiendo línea a línea hasta que ponga la palabra fin
 			System.out.println("Introduzca la línea que quiere insertar en el fichero (FIN para finalizar): ");
 			linea = sc.nextLine();
 			if(!linea.equalsIgnoreCase("fin")) {
