@@ -118,17 +118,14 @@ public class Ejemplos {
 		// Filtra e imprime:
 		System.out.println("Jugadores que ganan entre 50000 y 70000 euros y su nombre tenga más de 5 letras");
 		jugadores.stream()
-			.filter(e->e.getSueldo()>=50000)
-			.filter(e->e.getSueldo()<=70000)
+			.filter(e->e.getSueldo()>=50000 && e.getSueldo()<=70000)
 			.filter(e->e.getNombre().length()>5)
 			.forEach(e->System.out.println(e));
 		// Filtra e imprime:
 		System.out.println("Jugadores que tengan una 'N' en su nombre");
 		jugadores.stream()
 			.filter(e->e.getNombre().toLowerCase().contains("n"))
-			.forEach(e->System.out.println(e));
-		
-		
+			.forEach(e->System.out.println(e));		
 	}
 	
 	public static void main(String[] args) {
