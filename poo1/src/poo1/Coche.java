@@ -1,5 +1,7 @@
 package poo1;
 
+import java.util.Objects;
+
 public class Coche {
 	
 	// 1. propiedades o atributos
@@ -18,7 +20,6 @@ public class Coche {
 
 	// 2.2 Constructor con todos los parámetros
 	public Coche(int numeroRuedas, String marca, String modelo, String matricula, double precio) {
-		super();
 		this.setNumeroRuedas(numeroRuedas);
 		this.marca = marca;
 		this.modelo = modelo;
@@ -29,7 +30,7 @@ public class Coche {
 	// 2.3 Crear más constructores si se desean
 	
 	public Coche(int numeroRuedas, String marca, String modelo, double precio) {
-		super();
+		super();  // Tiene sentido si heredas, si no, ni ayuda ni molesta.
 		this.setNumeroRuedas(numeroRuedas);
 		this.marca = marca;
 		this.modelo = modelo;
@@ -101,13 +102,34 @@ public class Coche {
 			this.precio = precio;
 	}
 
-	// toString te permite decidir como quieres imprimir un objeto
+	//4. toString te permite decidir como quieres imprimir un objeto
 	@Override
 	public String toString() {
 		return "Coche (numeroRuedas=" + numeroRuedas + ", marca=" + marca + ", modelo=" + modelo + ", matricula="
 				+ this.getMatricula() + ", precio=" + precio + ")";
 	}
 
+	//5 hashCode and equals. Define el criterio de igualdad de dos objetos de la misma clase	
+	@Override
+	public int hashCode() {
+		return Objects.hash(matricula);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coche other = (Coche) obj;
+		return Objects.equals(matricula, other.matricula);
+	}
+
+	
+
+	
 	
 	
 	
