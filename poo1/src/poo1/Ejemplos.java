@@ -119,6 +119,37 @@ public class Ejemplos {
 			.forEach(e->System.out.print((e!=null)?e.getNombre() + "\n":""));
 		*/
 	}
+	
+	public static void ejercicio3() {
+		List<Jugador> jugadores = new ArrayList<Jugador>();
+		Jugador jugador1 = new Jugador("Fran", 45, 50000);
+		Jugador jugador2 = new Jugador("David", 20, 60000);
+		jugadores.add(jugador1);  // jugador que ocupa la posición 0 de la lista
+		jugadores.add(jugador2); // jugador que ocupa la posición 1 de la lista
+		jugadores.add(null);     // jugador que ocupa la posición 2 de la lista
+		jugadores.add(null);	 // jugador que ocupa la posición 3 de la lista
+		Jugador jugador4 = new Jugador("Paco", 45, 50000);
+		Jugador jugador5 = new Jugador("Luis", 20, 60000);
+		jugadores.add(jugador4);
+		jugadores.add(jugador5);
+		List<Jugador> jugadores2 = new ArrayList<Jugador>(); // La segunda lista inicialmente está vacía
+		// Copiar una lista a partir de otra con programación estructurada
+		for(Jugador jugador : jugadores) {
+			if(jugador!=null)
+				jugadores2.add(new Jugador(jugador));
+			else
+				jugadores2.add(null);
+		}
+		/*jugadores.stream().forEach(e->{
+			if(e!=null)
+				jugadores2.add(new Jugador(e));
+			else
+				jugadores2.add(null);
+		});*/
+		jugadores2.get(0).setNombre("Posición 0");
+		System.out.println(jugadores);
+		System.out.println(jugadores2);
+	}
 
 	public static void ejercicio1Ampliado() {
 		//Scanner sc = new Scanner(System.in);
@@ -244,7 +275,8 @@ public class Ejemplos {
 		//ejemploListaJugadores();
 		//ejemploEquipos();
 		//ejercicio1();
-		ejercicio2();
+		//ejercicio2();
+		ejercicio3();
 	}
 
 }
