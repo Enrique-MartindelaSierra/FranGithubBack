@@ -268,6 +268,14 @@ public class Ejemplos {
 		System.out.println(barsa);  // Imprimo el Barsa
 		System.out.println(madrid);	// Imprimo el Madrid	
 	}
+
+	public static void falloSiNoSeCorrige() {
+		Equipo equipo = new Equipo();
+		Jugador fran = new Jugador("Fran", 45, 50000);
+		equipo.getJugadores().add(fran);
+		equipo.getEstadio().setNombre("Mi estadio");
+		System.out.println("Fin del programa");
+	}
 	
 	public static void main(String[] args) {
 		//ejemplosCoches();
@@ -276,7 +284,8 @@ public class Ejemplos {
 		//ejemploEquipos();
 		//ejercicio1();
 		//ejercicio2();
-		ejercicio3();
+		//ejercicio3();
+		falloSiNoSeCorrige();
 	}
 
 }
