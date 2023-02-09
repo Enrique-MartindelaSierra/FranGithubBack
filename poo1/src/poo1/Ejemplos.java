@@ -2,6 +2,7 @@ package poo1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ejemplos {
 	
@@ -27,7 +28,7 @@ public class Ejemplos {
 				z3.getMarca() + " " 
 				+ z3.getModelo() + " Con matrícula: " + z3.getMatricula());
 		
-		Coche tercero = new Coche(4, "Mercedes", "Clase A", 15000);
+		Coche tercero = new Coche(4, "Mercedes", "Clase A", 40000);
 		System.out.println(tercero);
 		
 		// Vamos a probar el constructor de copia
@@ -55,9 +56,18 @@ public class Ejemplos {
 		} else {
 			System.out.println("Los coches son diferentes");
 		}
+		
+		
+		if(tercero.esCaro()) {
+			System.out.println("Mi coche es caro");
+		} else {
+			System.out.println("Mi coche es barato");
+		}
+		
 	}
 	
 	public static void ejercicio1() {
+		//Scanner sc = new Scanner(System.in);
 		Jugador jugador1 = new Jugador("Fran", 45, 50000);
 		Jugador jugador2 = new Jugador("David", 20, 60000);
 		Jugador jugador3 = new Jugador("Bárbara", 23, 70000);
@@ -74,6 +84,17 @@ public class Ejemplos {
 		System.out.println(jugador1);
 		System.out.println(jugador9);
 		System.out.println(jugador10);
+		/*int edad;
+		do {
+			System.out.println("Introduzca la edad (la edad debe ser mayor o igual a 0):");
+			edad = Integer.parseInt(sc.nextLine());
+		} while (edad<0);
+		System.out.println("Salgo del bucle con edad = " + edad);
+		if(edad>0) {
+			Jugador jugador11 = new Jugador("Paco",edad,1000);
+		} else {
+			System.out.println("Ha introducido una edad errónea");
+		}*/
 	}
 	
 	public static void ejemploListaJugadores() {
@@ -110,6 +131,7 @@ public class Ejemplos {
 		
 		// Imprmir todos los jugadores
 		jugadores.forEach(e->System.out.println(e));
+		jugadores.forEach(e->System.out.println(e.nombreOculto() + " gana " + e.getSueldo()));
 		// Filtra e imprime:
 		System.out.println("Jugadores que ganan más de 60000 euros");
 		jugadores.stream()
@@ -128,10 +150,45 @@ public class Ejemplos {
 			.forEach(e->System.out.println(e));		
 	}
 	
+	public static void ejemploEquipos() {
+		Equipo barsa = new Equipo();
+		barsa.setNombre("F.C. Barcelona");
+		barsa.setPresupuesto(400000000);
+		Estadio campNou = new Estadio();  // Creo el estadio y le doy datos
+		campNou.setNombre("Spotify Camp Nou");
+		campNou.setCapacidad(100000);
+		barsa.setEstadio(campNou);	// asigno el estadio al equipo
+		List<Jugador> jugadoresBarsa = new ArrayList<Jugador>();  // Creo la lista y le meto jugadores
+		jugadoresBarsa.add(new Jugador("Fran",45,100000));
+		jugadoresBarsa.add(new Jugador("Paco",70,200000));
+		jugadoresBarsa.add(new Jugador("Dani",42,300000));
+		jugadoresBarsa.add(new Jugador("Consu",39,400000));
+		barsa.setJugadores(jugadoresBarsa);
+		System.out.println("Fin de la creación del equipo");
+		// Imprimpo el equipo
+		//System.out.println(barsa);
+		
+		// Probamos el constructor de copia
+		Equipo madrid = new Equipo(barsa);
+		madrid.setNombre("Real Madrid");
+		madrid.setPresupuesto(100000);
+		barsa.getEstadio().setNombre("Nuevo Campo");  // Le cambio el nombre del estadio del barsa
+		madrid.getEstadio().setNombre("Santiago Bernabeu");
+		madrid.getEstadio().setCapacidad(80000);
+		// Accede al equipo, luego a su lista de jugadores, luego a su primer elemento de la lista y luego le cambia el nombre
+		barsa.getJugadores().get(0).setNombre("Francisco");  
+		madrid.getJugadores().get(1).setNombre("Ate");
+		
+		// Impresión de los equipos
+		System.out.println(barsa);  // Imprimo el Barsa
+		System.out.println(madrid);	// Imprimo el Madrid	
+	}
+	
 	public static void main(String[] args) {
 		//ejemplosCoches();
 		//ejercicio1();	
-		ejemploListaJugadores();
+		//ejemploListaJugadores();
+		ejemploEquipos();
 	}
 
 }

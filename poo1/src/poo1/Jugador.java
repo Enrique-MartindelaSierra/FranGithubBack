@@ -73,4 +73,16 @@ public class Jugador {
 				&& Double.doubleToLongBits(sueldo) == Double.doubleToLongBits(other.sueldo);
 	}
 	
+	public String nombreOculto() {
+		/*String resultado;
+		int numLetras = nombre.length();
+		resultado = nombre.substring(0,2) + "*".repeat(numLetras-2);
+		return resultado;*/
+		
+		return nombre.substring(0,2) + "*".repeat(nombre.length()-2);	
+	}
+	
+	
+	
+	
 }
