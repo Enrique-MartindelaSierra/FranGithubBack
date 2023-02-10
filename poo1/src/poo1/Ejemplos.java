@@ -154,8 +154,29 @@ public class Ejemplos {
 		System.out.println(jugadores2);
 	}
 	
-	
+	/**
+	 * Crea una clase llamada Equipo que tenga una lista (private) con los jugadores.
+	 * Crea los métodos en la clase Equipo:
+	 * constructor vacío → Inicializa la lista
+	 * addJugador(Jugador) → Añade el jugador a la lista interna
+	 * getNumJugadores() → Devuelve la cantidad de jugadores que hay
+	 * getJugador(pos) → Devuelve el jugador de esa posición de la lista. Si no existe devuelve null
+	 * deleteJugador(pos) → Borra el jugador de esa posición (si existe)
+	 * totalSueldos() → Devuelve la suma de los sueldos de los jugadores del equipo
+	 */
 	public static void ejercicio4() {
+		Equipo equipo = new Equipo();
+		equipo.setNombre("Equipo EOI");
+		equipo.addJugador(new Jugador("Fran",25,100000));  // añade jugadores a la lista
+		equipo.addJugador(new Jugador("Paco",25,100000));
+		equipo.addJugador(new Jugador("Luis",25,100000));
+		equipo.addJugador(new Jugador("Jose",25,100000));
+		equipo.deleteJugador(0);  // borra el primer elemento
+		equipo.getJugadores().forEach(e->System.out.println(e));  // Muestra todos los jugadores de la lista
+		System.out.println("El sueldo de todos los jugadores es: " + equipo.totalSueldos());				
+	}
+	
+	/*public static void ejercicio4ampliacionConceptoNoVoid() {
 		Equipo equipo = new Equipo();
 		equipo.setNombre("Equipo EOI");
 		//equipo.setJugadores(null);
@@ -163,7 +184,7 @@ public class Ejemplos {
 			System.out.println(equipo);
 		else
 			System.out.println("No se ha podido añadir el jugador");
-	}
+	}*/
 
 	public static void ejercicio1Ampliado() {
 		//Scanner sc = new Scanner(System.in);
