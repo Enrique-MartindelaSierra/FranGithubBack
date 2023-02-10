@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Estadio {
 
-	String nombre;
-	int capacidad;
+	private String nombre;
+	private int capacidad;
 	
 	public Estadio() {
 		

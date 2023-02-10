@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class Ejemplos {
 	
+	
+	static List<Jugador> jugadoresGlobal = new ArrayList<Jugador>();
+	
 	public static void ejemplosCoches() {
 		Coche miCoche = new Coche();  // Me crea un coche sin datos. Usa el constructor vacío
 		//miCoche.numeroRuedas = -4;
@@ -69,7 +72,7 @@ public class Ejemplos {
 	public static void ejercicio1() {
 		Jugador jugador1 = new Jugador("Fran", 45, 50000);
 		Jugador jugador2 = new Jugador("David", 20, 60000);
-		System.out.println(jugador1);
+		System.out.println(jugador1.toString());
 		System.out.println(jugador2);
 	}
 	
@@ -149,6 +152,17 @@ public class Ejemplos {
 		jugadores2.get(0).setNombre("Posición 0");
 		System.out.println(jugadores);
 		System.out.println(jugadores2);
+	}
+	
+	
+	public static void ejercicio4() {
+		Equipo equipo = new Equipo();
+		equipo.setNombre("Equipo EOI");
+		//equipo.setJugadores(null);
+		if(equipo.addJugador(new Jugador("Fran",25,100000)))
+			System.out.println(equipo);
+		else
+			System.out.println("No se ha podido añadir el jugador");
 	}
 
 	public static void ejercicio1Ampliado() {
@@ -277,6 +291,74 @@ public class Ejemplos {
 		System.out.println("Fin del programa");
 	}
 	
+	public static void ejemploNaomi() {
+		// Lista original
+		List<Jugador> players = new ArrayList<Jugador>();
+		Jugador naomi = new Jugador("Naomi", 20, 48050);
+		Jugador luna = new Jugador("Luna", 20, 90050);
+		Jugador jake = new Jugador("Jake", 20, 100050);
+		Jugador dominique = new Jugador("Dominique", 20, 60050);
+		players.add(naomi);
+		players.add(luna);
+		players.add(jake);
+		players.add(dominique);  // La lista con los 4 jugadores dentro
+		System.out.println("Por el momento hay " + Jugador.getContador() + " jugadores");
+		// Lista copia -> Esto no
+		/*
+		List<Jugador> clonedJugadors = new ArrayList<Jugador>(players);  // No hace una lista de datos independientes
+		clonedJugadors.get(0).setNombre("Fran");
+		System.out.println("El clon tiene:");
+		clonedJugadors.forEach(e->System.out.println(e));
+		System.out.println("El original tiene:");
+		players.forEach(e->System.out.println(e));
+		*/
+		// Segundo intento, crear una lista clonada a partir de la original -> Fallo de nuevo
+		/*
+		List<Jugador> clonedJugadors2 = new ArrayList<Jugador>();
+		clonedJugadors2.addAll(players);
+		clonedJugadors2.get(0).setNombre("Fran");
+		System.out.println("El clon tiene:");
+		clonedJugadors2.forEach(e->System.out.println(e));
+		System.out.println("El original tiene:");
+		players.forEach(e->System.out.println(e));
+		*/
+		List<Jugador> clonedJugadors3 = new ArrayList<Jugador>();
+		
+		//players.forEach(e->clonedJugadors3.add(new Jugador(e)));  // Funcional
+		
+		for(Jugador e : players) {  // Estructurada
+			clonedJugadors3.add(new Jugador(e));
+		}
+		
+		clonedJugadors3.get(0).setNombre("Fran");
+		System.out.println("El clon tiene:");
+		clonedJugadors3.forEach(e->System.out.println(e));
+		System.out.println("El original tiene:");
+		players.forEach(e->System.out.println(e));
+		System.out.println("Por el momento hay " + Jugador.getContador() + " jugadores");
+		
+		/*clonedJugadors.addAll(players); 
+		Jugador clonNaomi = new Jugador(naomi);
+		Jugador clonLuna = new Jugador(luna);
+		Jugador clonJake = new Jugador(jake);
+		Jugador clonDominique = new Jugador(dominique);
+		clonJake.setNombre("Nick");
+		players.add(clonNaomi);
+		players.add(clonLuna);
+		players.add(clonJake);
+		players.add(clonDominique);
+		players.stream()
+		.forEach(e->System.out.println(e));*/
+	}
+	
+	public static void global1() {
+		jugadoresGlobal.add(new Jugador("Fran",25,10000));
+	}
+	
+	public static void global2() {
+		jugadoresGlobal.add(new Jugador("Otro",30,10000));
+	}
+	
 	public static void main(String[] args) {
 		//ejemplosCoches();
 		//ejercicio1Ampliado();	
@@ -285,7 +367,13 @@ public class Ejemplos {
 		//ejercicio1();
 		//ejercicio2();
 		//ejercicio3();
-		falloSiNoSeCorrige();
+		//falloSiNoSeCorrige();
+		//ejemploNaomi();
+		
+		//global1();
+		//global2();
+		//jugadoresGlobal.forEach(e->System.out.println(e));
+		ejercicio4();
 	}
 
 }

@@ -87,4 +87,23 @@ public class Equipo {
 		return Objects.equals(nombre, other.nombre);
 	}
 	
+	/**
+	 * Añadir el jugador a la lista de jugadores del equipo
+	 * @param j
+	 */
+	/*public void addJugador(Jugador j) {
+		jugadores.add(j);
+	}*/
+	
+	public boolean addJugador(Jugador j) {
+		try {
+			jugadores.add(j);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+	
 }
