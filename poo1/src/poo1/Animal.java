@@ -1,8 +1,9 @@
 package poo1;
 
+import java.util.Objects;
 import java.util.Random;
 
-public class Animal {
+public abstract class Animal {
 	private double peso;
 	private String nombre;
 
@@ -12,10 +13,10 @@ public class Animal {
 	}
 
 	public Animal(String nombre, double peso) {
-		 this.nombre = nombre;
-		 this.peso = peso;
+		this.nombre = nombre;
+		this.peso = peso;
 	}
-	
+
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
@@ -23,7 +24,6 @@ public class Animal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public double getPeso() {
 		return peso;
@@ -37,4 +37,34 @@ public class Animal {
 		peso += new Random().nextDouble() * 0.5;
 		System.out.printf("Ñam ñam. Ahora peso %.2f kilos\n", peso);
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s: %.2f kilos", nombre, peso);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre, peso);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Animal other = (Animal) obj;
+		return Objects.equals(nombre, other.nombre)
+				&& Double.doubleToLongBits(peso) == Double.doubleToLongBits(other.peso);
+	}
+
+	
+
+	
+	
+	
+
 }

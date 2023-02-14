@@ -11,7 +11,7 @@ public class Mamifero extends Animal {
 
 	@Override
 	public void comer() {
-		super.comer();
+		super.comer();  // Aquí llamamos al comer de Animal
 		System.out.println("He comido: " + (carnivoro ? "carne" : "hierba"));
 	}
 }
