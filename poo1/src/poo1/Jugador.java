@@ -2,7 +2,7 @@ package poo1;
 
 import java.util.Objects;
 
-public class Jugador {  // hereda de Object
+public class Jugador implements IHablador {  // hereda de Object
 	
 	private String nombre;
 	private int edad;
@@ -93,6 +93,18 @@ public class Jugador {  // hereda de Object
 		
 		return nombre.substring(0,2) + "*".repeat(nombre.length()-2);	
 	}
+
+	@Override
+	public void hablar() {
+		System.out.println("hola");		
+	}
+
+	@Override
+	public void gritar() {
+		System.out.println("HOLA");		
+	}
+
+
 	
 	
 	

@@ -354,11 +354,12 @@ public class Ejemplos {
 	}
 
 	public static void ejemplosHerencias() {
-		List<String> cadenas = new ArrayList<String>();
 		//Animal animal = new Animal("Mi animal",10);  // Falla al ser clase Abstracta
+		
 		Ave pajaro = new Ave(true);
 		Ave gallina = new Ave("Animal desconocido", 1, false);
 
+		
 		
 		//animal.comer();
 		
@@ -368,6 +369,7 @@ public class Ejemplos {
 		System.out.println("El pájaro se llama : " + pajaro.getNombre());
 		
 		Mamifero leon = new Mamifero("León", 210, true);
+		
 		leon.comer();
 		System.out.println(pajaro.toString());
 		System.out.println(leon.toString());
@@ -386,7 +388,27 @@ public class Ejemplos {
 		} else {
 			System.out.println("El pájaro y el gato no son iguales");
 		}
-
+			
+		List<Animal> animales = new ArrayList<Animal>();
+		animales.add(gallina);
+		animales.add(pajaro);
+		animales.add(leon);
+		animales.forEach(e->System.out.println(e.toString()));  // Aquí hay polimorfismo.
+		animales.forEach(e->System.out.println(e.rugido())); // Aquí también.
+		
+		System.out.println("Ejemplo instanceof:");
+		for(Animal animal : animales) {
+			// La siguiente línea fallaría en los animales que no fuesen Ave. Debe ponerse dentro de un if con el instanceof
+			//System.out.println("El número de pollitos es: " + ((Ave)animal).pollitos(animal.getNombre()));
+			if(animal instanceof Ave) {
+				System.out.println("El número de pollitos es: " + ((Ave)animal).pollitos(animal.getNombre()));
+				System.out.println(animal.rugido());
+			} else if(animal instanceof Mamifero) {
+				System.out.println(animal.rugido());
+			}		
+		}
+			
+		
 	}
 
 	public static void main(String[] args) {

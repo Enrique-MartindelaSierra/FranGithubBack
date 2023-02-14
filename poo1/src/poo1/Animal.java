@@ -37,6 +37,10 @@ public abstract class Animal {
 		peso += new Random().nextDouble() * 0.5;
 		System.out.printf("Ñam ñam. Ahora peso %.2f kilos\n", peso);
 	}
+	
+	public abstract String tipoAnimal();
+	
+	public abstract String rugido();
 
 	@Override
 	public String toString() {
