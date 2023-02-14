@@ -462,6 +462,7 @@ public class Ejemplos {
 			}
 		}
 		
+		// Mi favorita en este caso
 		int contador = 0;
 		for(Persona persona : personas) {
 			if(persona.equals(copia)) {
@@ -481,7 +482,17 @@ public class Ejemplos {
 			}
 		}
 		
-		
+		// Para los talibanes de la prog funcional
+		int[] contador2 = new int[1];
+		personas.forEach(e->{
+			if(e.equals(copia)) {
+				System.out.println("Persona encontrada en la posición " + contador2[0]);
+				System.out.println("Persona encontrada: " + e);
+				System.out.println("Copia: " + copia);
+			}
+			contador2[0]++;
+		});
+				
 	}
 
 	public static void main(String[] args) {
