@@ -60,5 +60,7 @@ public class Persona {
 		Persona other = (Persona) obj;
 		return Objects.equals(nombre, other.nombre);
 	}
+
+	
 		
 }

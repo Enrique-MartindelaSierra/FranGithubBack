@@ -4,8 +4,12 @@ import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import com.fran.colecciones.entidades.Persona;
 
 public class App 
 {
@@ -87,12 +91,33 @@ public class App
 		// Con funcional sería
 		traducciones.forEach((clave, valor) -> System.out.println(clave + " en inglés es: " + valor));
 
+		Map<String,Persona> personas = new HashMap<>();
+		personas.put("111", new Persona("Fran",10000));
+		personas.put("222", new Persona("Pepe",10000));
+		personas.put("333", new Persona("Jose",10000));
+		personas.put("444", new Persona("Fran",10000));
+		
+		Persona persona3 = personas.get("333");
+		System.out.println(persona3);
+		
+	}
+	
+	public static void ejemploSet() {
+		// NO PERMITE ELEMENTOS DUPLICADOS
+		Set<Persona> personas = new HashSet<>();
+		personas.add(new Persona("Fran",10000));
+		personas.add(new Persona("Luis",10000));
+		personas.add(new Persona("Fran",10000));  	// La ignora
+		personas.add(new Persona("Fran",30000));	// La ignora
+		personas.add(new Persona("fran",10000));
+		System.out.println("El número de personas es: " + personas.size());  // 3		
 	}
 	
 	
     public static void main( String[] args )
     {
     	//ejemplosListas();
-    	ejemploMap();
+    	//ejemploMap();
+    	ejemploSet();
     }
 }
