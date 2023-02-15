@@ -1,8 +1,11 @@
 package com.fran.colecciones;
 
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class App 
 {
@@ -60,9 +63,36 @@ public class App
 		
 	}
 	
+	public static void ejemploMap() {
+		// Diccionario que almacena cadenas y el índice también es una cadena
+		Map<String, String> traducciones = new HashMap<>();
+		traducciones.put("mesa", "table");
+		traducciones.put("silla", "chair");
+		traducciones.put("cabeza", "head");
+		traducciones.put("botella", "bottle");
+		// {mesa=table, cabeza=head, botella=bottle, silla=chair}
+		System.out.println(traducciones);
+		
+		// Acceder a los valores
+		String palabra = traducciones.get("cabeza");
+		System.out.println(palabra); // head
+		
+		// Recorrer los valores
+		for(String key: traducciones.keySet()) {
+			 System.out.println(key + " en inglés es: " + traducciones.get(key));
+		}
+		for(String value: traducciones.values()) {
+		 System.out.println("Palabra: " + value + " (no puedo saber la clave...)");
+		}
+		// Con funcional sería
+		traducciones.forEach((clave, valor) -> System.out.println(clave + " en inglés es: " + valor));
+
+	}
+	
 	
     public static void main( String[] args )
     {
-    	ejemplosListas();
+    	//ejemplosListas();
+    	ejemploMap();
     }
 }
