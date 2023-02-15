@@ -14,7 +14,7 @@ public class App
 		List<Integer> numeros2 = new ArrayList<>(12);
 		// Se puede crear una lista a partir de un array
 		Integer[] array = {2, 3, 5};
-		List<Integer> numeros3 = Arrays.asList(array);
+		List<Integer> numeros3 = new ArrayList<>(Arrays.asList(array));
 		// Se puede crear una lista a partir de otra colección
 		List<Integer> numeros4 = new ArrayList<Integer>(numeros2);
 		
@@ -48,6 +48,15 @@ public class App
 		cadenas.forEach(e->System.out.println(e));
 		System.out.println(cadenas.indexOf("Hola"));  // 0
 		System.out.println(cadenas.lastIndexOf("Hola"));  // 3
+		
+		List<String> otra2 = new ArrayList<>(Arrays.asList("hola","en","minúscula"));  // Lo correcto para crear una lista a partir de datos iniciales en un array
+		
+		// borrados lista
+		cadenas.remove("Mundo");
+		cadenas.removeAll(otra2);
+		cadenas.forEach(e->System.out.println(e));
+		cadenas.removeIf(e->e.equals("Hola"));
+		cadenas.forEach(e->System.out.println(e));
 		
 	}
 	
