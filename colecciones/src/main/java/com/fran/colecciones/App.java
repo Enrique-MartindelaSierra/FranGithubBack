@@ -52,10 +52,10 @@ public class App
 		List<String> otra2 = new ArrayList<>(Arrays.asList("hola","en","minúscula"));  // Lo correcto para crear una lista a partir de datos iniciales en un array
 		
 		// borrados lista
-		cadenas.remove("Mundo");
-		cadenas.removeAll(otra2);
+		cadenas.remove("Mundo");  // Borra el primer "Mundo"
+		cadenas.removeAll(otra2);  // Borra un conjunto
 		cadenas.forEach(e->System.out.println(e));
-		cadenas.removeIf(e->e.equals("Hola"));
+		cadenas.removeIf(e->e.equals("Hola"));  // Borra TODOS los elementos de la lista que cumplan la condicion a la derecha de ->
 		cadenas.forEach(e->System.out.println(e));
 		
 	}
