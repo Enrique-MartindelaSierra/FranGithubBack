@@ -1,6 +1,8 @@
 package poo1;
 
-public class TiendaLicores extends Tienda {
+
+// Si pones el modificador final a una clase, no se podrá heredar de ella
+public final class TiendaLicores extends Tienda {
 
 	@Override
 	public void bienvenida() {
