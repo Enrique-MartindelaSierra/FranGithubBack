@@ -1,6 +1,8 @@
 package com.fran.xml;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +17,8 @@ import org.w3c.dom.NodeList;
 
 import com.fran.xml.entidades.Asignatura;
 import com.fran.xml.entidades.NoticiaMarca;
+import com.fran.xml.entidades.NoticiaSensacine;
+import com.fran.xml.utilidades.InternetUtils;
 
 
 public class App 
@@ -118,6 +122,38 @@ public class App
 		
 	}
 	
+	public static List<NoticiaSensacine> devolverNoticiasSensacine(String web) {
+		List<NoticiaSensacine> resultado = new ArrayList<>();
+		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(web);  // Comprueba que es un XML valido
+			doc.getDocumentElement().normalize();
+			
+			NodeList nList = doc.getElementsByTagName("item");
+			
+			for (int temp = 0; temp < nList.getLength(); temp++) {  // recorre las asignaturas
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					// añado cada asignatura a la lista
+					resultado.add(new NoticiaSensacine(
+							eElement.getElementsByTagName("category").item(0).getTextContent(),
+							eElement.getElementsByTagName("title").item(0).getTextContent(),
+							eElement.getElementsByTagName("description").item(0).getTextContent(),
+							eElement.getElementsByTagName("author").item(0).getAttributes().getNamedItem("name").getTextContent(),
+							eElement.getElementsByTagName("guid").item(0).getTextContent(),
+							LocalDate.parse(eElement.getElementsByTagName("pubDate").item(0).getTextContent(),DateTimeFormatter.RFC_1123_DATE_TIME)					
+							));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultado;
+		
+	}
 
 	
 	
@@ -130,6 +166,7 @@ public class App
     		.filter(e->e.getCurso().equals("Segundo"))
     		.forEach(e->System.out.println(e));*/
     	
+    	/*
     	List<NoticiaMarca> noticias = devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/futbol-femenino.xml");
     	//noticias.forEach(e->System.out.println(e));
     	noticias.addAll(devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"));
@@ -140,6 +177,20 @@ public class App
     	noticias.stream()
     		.filter(e->e.getTitle().contains(filtro))
     		.forEach(e->System.out.println(e.getTitle()));
+    	*/
+    	
+    	/*
+    	List<NoticiaSensacine> noticias = devolverNoticiasSensacine("https://www.sensacine.com/rss/noticias.xml");
+    	noticias.stream()
+    	//.filter(e->e.getPubDate().equals(LocalDate.now().minusDays(1)))   // Coge las noticias de ayer 	
+    	.filter(e->e.getPubDate().equals(LocalDate.now()))   // Coge las noticias de hoy 	
+    	.forEach(e->System.out.println(e));
+    	*/
+    	
+    	List<String> lineasHtml = InternetUtils.readUrlList("https://www.chollometro.com/");
+    	lineasHtml.stream()
+    		.forEach(e->System.out.println(e));
+    	
     	
     	sc.close();
     		    	
