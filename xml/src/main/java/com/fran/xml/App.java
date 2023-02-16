@@ -101,9 +101,6 @@ public class App
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					// añado cada asignatura a la lista
-					if(eElement.getElementsByTagName("dc:creator").getLength()>0) {
-						
-					}
 					resultado.add(new NoticiaMarca(
 							eElement.getElementsByTagName("title").item(0).getTextContent(),
 							eElement.getElementsByTagName("description").item(0).getTextContent(),
