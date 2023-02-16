@@ -3,6 +3,7 @@ package com.fran.xml;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.fran.xml.entidades.Asignatura;
+import com.fran.xml.entidades.NoticiaMarca;
 
 
 public class App 
@@ -84,16 +86,65 @@ public class App
 		
 	}
 	
+	public static List<NoticiaMarca> devolverNoticiasMarca(String web) {
+		List<NoticiaMarca> resultado = new ArrayList<>();
+		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(web);  // Comprueba que es un XML valido
+			doc.getDocumentElement().normalize();
+			
+			NodeList nList = doc.getElementsByTagName("item");
+			
+			for (int temp = 0; temp < nList.getLength(); temp++) {  // recorre las asignaturas
+				Node nNode = nList.item(temp);
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					// añado cada asignatura a la lista
+					if(eElement.getElementsByTagName("dc:creator").getLength()>0) {
+						
+					}
+					resultado.add(new NoticiaMarca(
+							eElement.getElementsByTagName("title").item(0).getTextContent(),
+							eElement.getElementsByTagName("description").item(0).getTextContent(),
+							(eElement.getElementsByTagName("dc:creator").getLength()>0)?eElement.getElementsByTagName("dc:creator").item(0).getTextContent():"",
+							eElement.getElementsByTagName("guid").item(0).getTextContent(),
+							eElement.getElementsByTagName("pubDate").item(0).getTextContent()					
+							));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return resultado;
+		
+	}
+	
 
 	
 	
     public static void main( String[] args )
     {
+    	Scanner sc = new Scanner(System.in);
         //leerXmlFichero("asignaturas.xml");
-    	List<Asignatura> asignaturas = devolverAsignaturas("asignaturas.xml");
+    	/*List<Asignatura> asignaturas = devolverAsignaturas("asignaturas.xml");
     	asignaturas.stream()
     		.filter(e->e.getCurso().equals("Segundo"))
-    		.forEach(e->System.out.println(e));
+    		.forEach(e->System.out.println(e));*/
+    	
+    	List<NoticiaMarca> noticias = devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/futbol-femenino.xml");
+    	//noticias.forEach(e->System.out.println(e));
+    	noticias.addAll(devolverNoticiasMarca("https://e00-marca.uecdn.es/rss/futbol/primera-division.xml"));
+    	noticias.addAll(devolverNoticiasMarca("https://e00-elmundo.uecdn.es/elmundo/rss/portada.xml"));
+    	noticias.addAll(devolverNoticiasMarca("https://www.informacion.es/rss/section/7034"));
+    	System.out.println("Introduzca el filtro para las noticias:");
+    	String filtro = sc.nextLine();
+    	noticias.stream()
+    		.filter(e->e.getTitle().contains(filtro))
+    		.forEach(e->System.out.println(e.getTitle()));
+    	
+    	sc.close();
     		    	
     }
 }
