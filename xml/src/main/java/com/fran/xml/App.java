@@ -187,10 +187,11 @@ public class App
     	.forEach(e->System.out.println(e));
     	*/
     	
+    	/*
     	List<String> lineasHtml = InternetUtils.readUrlList("https://www.chollometro.com/");
     	lineasHtml.stream()
     		.forEach(e->System.out.println(e));
-    	
+    	*/
     	
     	sc.close();
     		    	
