@@ -2,6 +2,8 @@ package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -108,6 +110,91 @@ public class App
 				.collect(Collectors.toSet());
 		System.out.println("Nombres distintos");
 		nombresDistintos.forEach(e->System.out.println(e));
+				
+	}
+	
+	/**
+	 * Creación de listas de elementos NO-DUPLICADOS
+	 */
+	public static void toSet() {
+		// Final
+		Set<Usuario> usuariosDistintos = usuarios.stream()
+		.collect(Collectors.toSet());
+		usuariosDistintos.forEach(e->System.out.println(e));		
+	}
+	
+	/**
+	 * Sum suma todos los valores, average saca la media
+	 */
+	public static void sumAvg() {
+		// Finales
+		
+		// suma de todos los sueldos
+		double sumaSueldos = usuarios.stream()
+		.mapToDouble(e->e.getSueldo())  // me quedo solo con los sueldos
+		.sum();
+		System.out.println("La suma de todos los sueldos es: " + sumaSueldos);
+		
+		// media de los sueldos
+		
+		// Los Optional son datos que pueden contener valor o no.
+		
+		OptionalDouble mediaOpcional = usuarios.stream()
+		.mapToDouble(e->e.getSueldo())
+		.average();
+		
+		System.out.println("La media es: " + mediaOpcional.getAsDouble());
+		
+		descargar();
+		OptionalDouble mediaOpcional2 = usuarios.stream()
+				.mapToDouble(e->e.getSueldo())
+				.average();
+		if(mediaOpcional2.isPresent())		
+			System.out.println("La media es: " + mediaOpcional2.getAsDouble());
+		else
+			System.out.println("La lista está vacía y por lo tanto no hay media");
+		
+		poblar();
+		double mediaSegura = usuarios.stream()
+		.mapToDouble(e->e.getSueldo())
+		.average().orElse(0);  // da valor por defecto en caso de estar la lista vacía
+		System.out.println("La media segura es: " + mediaSegura);
+	}
+	
+	/**
+	 * Busca dentro de la lista
+	 */
+	public static void find() {
+		// Final
+		
+		// Quédate con el primer usuario que gane más de 45000 de sueldo
+		
+		// Con Optional
+		Optional<Usuario> usuario = usuarios.stream()
+			.filter(e->e.getSueldo()>450000)
+			.findFirst();
+		if(usuario.isPresent())
+			System.out.println("El primer usuario que gana más de 45000 es: " + usuario.get().getNombre());
+		else
+			System.out.println("Nadie gana esa cantidad");
+		
+		// Sin optional
+		Usuario usuario2 = usuarios.stream()
+				.filter(e->e.getSueldo()>450000)
+				.findFirst().orElse(null);
+		if(usuario2!=null)
+			System.out.println(usuario2.getNombre());
+		
+		Usuario usuario3 = usuarios.stream()
+				.filter(e->e.getSueldo()>45000)
+				.findFirst().orElse(new Usuario(1,"Sin datos",0));
+		System.out.println(usuario3.getNombre());
+		
+		// findAny -> te devuelve alguno, no sabemos cual
+		Usuario usuario4 = usuarios.stream()
+				.filter(e->e.getSueldo()>45000)
+				.findAny().orElse(new Usuario(1,"Sin datos",0));
+		System.out.println(usuario4.getNombre());
 		
 		
 	}
@@ -117,6 +204,9 @@ public class App
     	poblar();  // dar datos iniciales
     	//forEach();
     	//filter();
-    	map();
+    	//map();
+    	//toSet();
+    	//sumAvg();
+    	find();
     }
 }
