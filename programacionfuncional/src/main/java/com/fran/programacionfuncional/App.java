@@ -2,6 +2,7 @@ package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fran.programacionfuncional.entidades.Usuario;
 
@@ -29,6 +30,9 @@ public class App
 		usuarios.clear();
 	}
 	
+	/**
+	 * Recorrer los elementos de una lista
+	 */
 	public static void forEach() {
 		// Final
 		
@@ -51,9 +55,37 @@ public class App
 		
 	}
 	
+	/**
+	 * permite filtrar los elementos de una lista
+	 */
+	public static void filter() {
+		// No final
+		usuarios.stream()
+			.filter(e->e.getSueldo()>30000)
+			.forEach(e->System.out.println(e));
+		
+		usuarios.stream()
+		.filter(e->e.getSueldo()>30000 && e.getSueldo()<50000)
+		.forEach(e->System.out.println(e));
+		
+		usuarios.stream()
+		.filter(e->e.getSueldo()>30000)
+		.filter(e->e.getSueldo()<50000)
+		.forEach(e->System.out.println(e));
+		
+		// Creación de una sublista
+		List<Usuario> ricos = usuarios.stream()
+				.filter(e->e.getSueldo()>=50000)
+				.collect(Collectors.toList());  // crea la sublista
+		System.out.println("Los ricos son:");
+		ricos.forEach(e->System.out.println(e));
+		
+	}
+	
     public static void main( String[] args )
     {
     	poblar();  // dar datos iniciales
-    	forEach();
+    	//forEach();
+    	filter();
     }
 }
