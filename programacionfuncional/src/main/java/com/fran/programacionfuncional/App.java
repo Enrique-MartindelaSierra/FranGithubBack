@@ -207,6 +207,6 @@ public class App
     	//map();
     	//toSet();
     	//sumAvg();
-    	find();
+    	//find();
     }
 }
