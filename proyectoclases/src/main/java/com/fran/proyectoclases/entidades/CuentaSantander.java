@@ -40,7 +40,7 @@ public class CuentaSantander extends Cuenta {
 	}
 
 	public static void setContador(int contador) {
-		CuentaSantander.contador = contador;
+		CuentaSantander.contador = Math.abs(contador);
 	}
 
 	@Override
