@@ -2,6 +2,7 @@ package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fran.programacionfuncional.entidades.Usuario;
@@ -82,10 +83,40 @@ public class App
 		
 	}
 	
+	/**
+	 * A partir de un lista nos quedamos con parte de los objetos
+	 */
+	public static void map() {
+		// No final
+		
+		// Crea una lista con los nombres de los usuarios
+		List<String> nombres =usuarios.stream()
+			.map(e->e.getNombre())  // se queda solo con los nombres
+			.collect(Collectors.toList());
+		nombres.forEach(e->System.out.println(e));
+		
+		// Imprimir los id's de aquellos usuarios que ganen más de 40000
+		usuarios.stream()
+		.filter(e->e.getSueldo()>40000)
+		.mapToInt(e->e.getId())  // me quedo con los id's
+		.filter(e->e<6)  // aquí recorremos id's no usuarios
+		.forEach(e->System.out.println(e));
+		
+		// Crea una lista de los nombres DISTINTOS
+		Set<String> nombresDistintos =usuarios.stream()
+				.map(e->e.getNombre())  // se queda solo con los nombres
+				.collect(Collectors.toSet());
+		System.out.println("Nombres distintos");
+		nombresDistintos.forEach(e->System.out.println(e));
+		
+		
+	}
+	
     public static void main( String[] args )
     {
     	poblar();  // dar datos iniciales
     	//forEach();
-    	filter();
+    	//filter();
+    	map();
     }
 }
