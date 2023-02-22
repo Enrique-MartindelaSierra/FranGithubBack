@@ -1,7 +1,9 @@
 package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
@@ -195,7 +197,81 @@ public class App
 				.filter(e->e.getSueldo()>45000)
 				.findAny().orElse(new Usuario(1,"Sin datos",0));
 		System.out.println(usuario4.getNombre());
+				
+	}
+	
+	/**
+	 * A partir de una lista de listas las juntas y las concatena en una única lista
+	 * Baja una dimension
+	 */
+	public static void flatMap() {
+		// no final
+		List<String> clase1 = new ArrayList<String>(Arrays.asList("Fran","Dani"));
+		List<String> clase2 = new ArrayList<String>(Arrays.asList("Paco","Pepe","Luis"));
+		List<String> clase3 = new ArrayList<String>(Arrays.asList("Paco2","Pepe3","Luis4"));
+		List<List<String>> todasClases = new ArrayList<List<String>>(Arrays.asList(clase1,clase2,clase3));
 		
+		List<String> todosAlumnos = todasClases.stream()
+		.flatMap(e->e.stream())   // te permite unir todas las sublistas en una única lista
+		.collect(Collectors.toList());
+		todosAlumnos.forEach(e->System.out.println(e));		
+	}
+	
+	/**
+	 * Lo mismo que el forEach pero no final
+	 */
+	public static void peek() {
+		// No final
+		
+		// Aumenta todos los sueldos 1000 euros e imprime de nuevo los usuarios
+		usuarios.stream()
+			.peek(e->e.setSueldo(e.getSueldo()+1000))
+			.forEach(e->System.out.println(e));
+	}
+	
+	/**
+	 * Parte la lista original en 2 sublistas. Una que cumple la condición y otra que no.
+	 */
+	public static void partitioningBy() {
+		Map<Boolean,List<Usuario>> sublistas = usuarios.stream()
+			.collect(Collectors.partitioningBy(e->e.getSueldo()>35000));
+		
+		// la sublista de los que ganan más de 35000
+		System.out.println("Ganan más de 35000:");
+		sublistas.get(true).forEach(e->System.out.println(e));
+		
+		// la sublista de los que ganan menos de 35000
+		System.out.println("Ganan menos de 35000:");
+		sublistas.get(false).forEach(e->System.out.println(e));
+	}
+	
+	/**
+	 * Agrupar por la condición que le digamos. Tendremos tantas listas como posibilidades haya
+	 */
+	public static void groupingBy() {
+		Map<Character,List<Usuario>> agenda = usuarios.stream()
+		.collect(Collectors.groupingBy(e->e.getNombre().charAt(0)));
+		
+		if(agenda.containsKey('F')) {
+			agenda.get('F').forEach(e->System.out.println(e));
+		}
+		
+		// recorrer todas las sublistas de cada una de las letras
+		for(int i = (int)'A';i<=(int)'Z';i++) {  // recorrer las letras del abecedario
+			if(agenda.containsKey((char)i)) {  // solo para las listas que existan
+				System.out.println("Lista de la " + (char)i);
+				agenda.get((char)i).forEach(e->System.out.println(e));
+			}
+		}
+	}
+	
+	public static void groupingByCadenas(String cadena) {
+		Map<String,List<Usuario>> agenda = usuarios.stream()
+				.collect(Collectors.groupingBy(e->e.getNombre().substring(0, cadena.length())));
+		
+		if(agenda.containsKey(cadena)) {
+			agenda.get(cadena).forEach(e->System.out.println(e));
+		}
 		
 	}
 	
@@ -208,5 +284,9 @@ public class App
     	//toSet();
     	//sumAvg();
     	//find();
+    	//flatMap();
+    	//peek();
+    	//partitioningBy();
+    	groupingBy();
     }
 }
