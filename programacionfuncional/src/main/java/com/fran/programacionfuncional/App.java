@@ -2,6 +2,7 @@ package com.fran.programacionfuncional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -275,6 +276,79 @@ public class App
 		
 	}
 	
+	/**
+	 * Cuenta el número de elementos
+	 */
+	public static void count() {
+		// Final
+		long numRicos = usuarios.stream().filter(e->e.getSueldo()>40000).count();
+		System.out.println("El número de ricos son: " + numRicos);
+	}
+	
+	/**
+	 * Skip sirve para saltar resultados. Limit para limitar el número de resultados
+	 */
+	public static void skipYLimit() {
+		// No son finales
+		
+		// Saca los usuarios 3,4 y 5 que más ganan de la empresa
+		usuarios.stream()
+			.sorted(Comparator.comparingDouble(Usuario::getSueldo).reversed())  // ordeno los usuarios por sueldo en orden de mayor a menor
+			.skip(2)  // saltate los dos primeros
+			.limit(3) // coge 3 entre los que quedan
+			.forEach(e->System.out.println(e));
+	}
+	
+	/**
+	 * Devolverían el máximo y mínimo en base a un criterio de comparación
+	 */
+	public static void maxMin() {
+		
+		// Queremos obtener el usuario con id más bajo y el de id más alto
+		Optional<Usuario> masId =usuarios.stream()
+			.max(Comparator.comparingInt(Usuario::getId));
+		if(masId.isPresent())
+			System.out.println("El usuario con id más alto es: " + masId.get().getNombre());
+
+		Optional<Usuario> menosId =usuarios.stream()
+			.min(Comparator.comparingInt(Usuario::getId));
+		if(menosId.isPresent())
+			System.out.println("El usuario con id más bajo es: " + menosId.get().getNombre());
+	
+	}
+	
+	/**
+	 * Saca elementos distintos de la lista
+	 */
+	public static void distinct() {
+		// No final
+		
+		// ¿Cúantos usuarios distintos hay?
+		System.out.println("El número de usuarios distintos es: " + usuarios.stream().distinct().count());
+		
+		// obten una lista a partir de la original eliminando los duplicados
+		List<Usuario> usuariosDistintos =usuarios.stream()
+		.distinct()
+		.collect(Collectors.toList());
+		
+		// Dime los distintos sueldos que hay en la empresa
+		System.out.println("La lista de sueldos distintos es: ");
+		usuarios.stream()
+			.mapToDouble(Usuario::getSueldo)
+			.sorted()
+			.distinct()
+			.forEach(e->System.out.println(e));
+		
+		// Dime los diferentes nombres de los empleados
+		System.out.println("La lista de nombres distintos es: ");
+		usuarios.stream()
+			.map(Usuario::getNombre)
+			.distinct()
+			.forEach(e->System.out.println(e));
+		
+	}
+	
+	
     public static void main( String[] args )
     {
     	poblar();  // dar datos iniciales
@@ -287,6 +361,10 @@ public class App
     	//flatMap();
     	//peek();
     	//partitioningBy();
-    	groupingBy();
+    	//groupingBy();
+    	//count();
+    	//skipYLimit();
+    	//maxMin();
+    	distinct();
     }
 }

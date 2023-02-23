@@ -70,6 +70,6 @@ public class Usuario {
 			return false;
 		Usuario other = (Usuario) obj;
 		return id == other.id;
-	}	
+	}
 
 }
