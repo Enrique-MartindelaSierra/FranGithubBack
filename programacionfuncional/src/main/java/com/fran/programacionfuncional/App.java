@@ -3,6 +3,7 @@ package com.fran.programacionfuncional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -333,7 +334,7 @@ public class App
 		
 		// Dime los distintos sueldos que hay en la empresa
 		System.out.println("La lista de sueldos distintos es: ");
-		usuarios.stream()
+		usuarios.stream()		
 			.mapToDouble(Usuario::getSueldo)
 			.sorted()
 			.distinct()
@@ -343,11 +344,115 @@ public class App
 		System.out.println("La lista de nombres distintos es: ");
 		usuarios.stream()
 			.map(Usuario::getNombre)
+			//.map(e->e.getNombre())
 			.distinct()
 			.forEach(e->System.out.println(e));
 		
 	}
 	
+	/**
+	 * Todos devuelven booleanos
+	 * anyMatch. True si existe alguno que cumpla la condición
+	 * allMatch. True si todos cumplen la condición
+	 * noneMatch. True si ninguno cumple la condición
+	 */
+	public static void match() {
+		// Finales
+		
+		// Existe algún usuario que gane más de 100000 Euros?
+		boolean alguienSuperRico = usuarios.stream()
+				.anyMatch(e->e.getSueldo()>100000);
+		
+		// todos ganan un sueldo positivo?
+		boolean todosCobran = usuarios.stream()
+				.allMatch(e->e.getSueldo()>0);
+		
+		// no hay nadie que gane menos de 0?
+		boolean todosCobran2 = usuarios.stream()
+				.noneMatch(e->e.getSueldo()<0);
+		
+		System.out.println(alguienSuperRico + " " + todosCobran + " " + todosCobran2);
+		
+	}
+	
+	/**
+	 * Saca valores estadísticos para campos numéricos
+	 */
+	public static void summarizingDouble() {
+		// Final
+		DoubleSummaryStatistics estadisticas = usuarios.stream()
+			.collect(Collectors.summarizingDouble(Usuario::getSueldo));
+		
+		System.out.println("Media: " + estadisticas.getAverage());
+		System.out.println("Máximo: " + estadisticas.getMax());
+		System.out.println("Míximo: " + estadisticas.getMin());
+		System.out.println("Suma: " + estadisticas.getSum());
+		System.out.println("Número: " + estadisticas.getCount());
+		
+	}
+	
+	/**
+	 * Reduce los datos que tengamos a un ÚNICO valor
+	 */
+	public static void reduce() {
+		// Final
+		
+		// Multiplica todos los Id's
+		int idsmultiplicados = usuarios.stream()
+			.mapToInt(e->e.getId())
+			.reduce(1, (a,b)->a*b);
+		System.out.println("La multiplicación de los id's es: " + idsmultiplicados);
+		
+		// Crea una variable con todos los nombres de los usuarios, uno en cada línea
+		String dosPrimerasLetras = usuarios.stream()
+			.map(e->e.getNombre())
+			.reduce("",(a,b)->a.concat(b).concat("\n"));
+		System.out.println(dosPrimerasLetras);
+		
+	}
+	
+	/**
+	 * Une elementos y le puedes poner un separador
+	 */
+	public static void joining() {
+		// Final
+		String nombresDintintosMinusculasOrdenadosSeparadosComas = usuarios.stream()
+				.map(e->e.getNombre().toLowerCase())
+				.distinct()
+				.sorted()
+				.collect(Collectors.joining(", "));
+		System.out.println(nombresDintintosMinusculasOrdenadosSeparadosComas);
+								
+	}
+	
+	/**
+	 * Es igual a stream pero utilizando procesamiento paralelo.
+	 * Nos aprovechamos de los nucleos de nuestro ordenador.
+	 */
+	public static void parallelStream() {
+		long tiempoInicial = System.currentTimeMillis();
+		usuarios.forEach(e->convertirMayusculas(e.getNombre()));
+		long tiempoFinal = System.currentTimeMillis();
+		System.out.println("El tiempo de la operación ha sido: " + (tiempoFinal-tiempoInicial));
+		
+		// En paralelo
+		tiempoInicial = System.currentTimeMillis();
+		usuarios.parallelStream().forEach(e->convertirMayusculas(e.getNombre()));
+		tiempoFinal = System.currentTimeMillis();
+		System.out.println("El tiempo de la operación en paralelo ha sido: " + (tiempoFinal-tiempoInicial));
+	}
+	
+	
+	public static String convertirMayusculas(String nombre) {
+		// Método que simula una operación que tara un segundo y pico en realizarse
+		try {
+			Thread.sleep(1000);  // Duerme 1 segundo el procesador
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nombre.toUpperCase();
+	}
 	
     public static void main( String[] args )
     {
@@ -365,6 +470,11 @@ public class App
     	//count();
     	//skipYLimit();
     	//maxMin();
-    	distinct();
+    	//distinct();
+    	//match();
+    	//summarizingDouble();
+    	//reduce();
+    	//joining();
+    	parallelStream();
     }
 }
