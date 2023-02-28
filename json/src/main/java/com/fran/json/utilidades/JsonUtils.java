@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.fran.json.entidades.Films;
 import com.fran.json.entidades.People;
 import com.fran.json.entidades.Posts;
 import com.google.gson.Gson;
@@ -167,12 +169,32 @@ public class JsonUtils {
 		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
 	}
 	
+	public static Films leerFilm(String url) {		
+		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);
+	}
+	
+	public static <T> T leerObjeto(String url, Class<T> clase) {
+		return new Gson().fromJson(InternetUtils.readUrl(url), clase);
+	}
+	
 	public static List<People> leerPersonajes(String comienzoCadena, int numInicio, int numFin, String finCadena){
 		List<People> resultado = new ArrayList<People>();
 		for(int i=numInicio;i<=numFin;i++) {
 			resultado.add(leerPersonaje(comienzoCadena + i + finCadena));
 		}
 		return resultado;
+	}
+	
+	public static <T> List<T> leerObjetos(String comienzoCadena, int numInicio, int numFin, String finCadena,Class<T> clase){
+		List<T> resultado = new ArrayList<T>();
+		for(int i=numInicio;i<=numFin;i++) {
+			resultado.add(leerObjeto(comienzoCadena + i + finCadena,clase));
+		}
+		return resultado;
+	}
+	
+	public static <T> List<T> devolverArrayGsonGenerico(String url, Class<T[]> clase){
+		return Arrays.asList(new Gson().fromJson(InternetUtils.readUrl(url), clase));
 	}
 	
 }

@@ -3,6 +3,7 @@ package com.fran.json;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fran.json.entidades.Films;
 import com.fran.json.entidades.People;
 import com.fran.json.entidades.Posts;
 import com.fran.json.utilidades.JsonUtils;
@@ -30,7 +31,37 @@ public class App
     	System.out.println(luke);
     	*/
     	// devolver lista de personajes
+    	/*
     	List<People> personajes1al10 = JsonUtils.leerPersonajes("https://swapi.dev/api/people/", 1, 10, "?format=json");
     	personajes1al10.forEach(e->System.out.println(e));
+    	*/
+    	// Devolver película
+    	/*
+    	Films pelicula = JsonUtils.leerFilm("https://swapi.dev/api/films/1?format=json");
+    	System.out.println(pelicula);
+    	*/
+    	// Leer objetos utilizando el genérico
+    	/*
+    	People luke = JsonUtils.leerObjeto("https://swapi.dev/api/people/1?format=json", People.class);
+    	Films pelicula = JsonUtils.leerObjeto("https://swapi.dev/api/films/1?format=json", Films.class);
+    	System.out.println(luke);
+    	System.out.println(pelicula);
+    	*/
+    	// Leer lista de peliculas utilizando el genérico
+    	/*
+    	List<Films> peliculas = JsonUtils.leerObjetos("https://swapi.dev/api/films/", 1, 5, "?format=json", Films.class);
+    	peliculas.forEach(e->System.out.println(e));
+    	*/
+    	// Leer lista de personajes utilizando el genérico
+    	/*
+    	List<People> personajes = JsonUtils.leerObjetos("https://swapi.dev/api/people/", 8, 14, "?format=json", People.class);
+    	personajes.forEach(e->System.out.println(e));
+    	*/
+    	// Leer lista de posts utilizando el genérico
+    	publicaciones = JsonUtils.devolverArrayGsonGenerico("https://jsonplaceholder.typicode.com/posts",Posts[].class);
+        publicaciones.stream()
+        .filter(e->e.getId()%2==0)  // publicaciones pares        
+        .forEach(e->System.out.println(e));
+    	
     }
 }
