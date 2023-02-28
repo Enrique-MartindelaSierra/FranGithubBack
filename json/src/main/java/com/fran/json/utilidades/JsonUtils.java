@@ -3,8 +3,10 @@ package com.fran.json.utilidades;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,5 +109,58 @@ public class JsonUtils {
 			return null;
 		}
 	}
+	
+	public static void escribirJsonSimple() {
+		// creando JSONObject
+		JSONObject jo = new JSONObject();
+
+		// poniendo los primeros datos en JSONObject
+		jo.put("nombre", "Fran");
+		jo.put("apellido", "Garcia");
+		jo.put("edad", 25);
+
+		// para la dirección primero hay que crear un LinkedHashMap
+		Map m = new LinkedHashMap(4);
+		m.put("direccion", "Lillo Juan, 128");
+		m.put("ciudad", "San Vicente del Raspeig");
+		m.put("comunidad", "Valenciana");
+		m.put("codigoPostal", "03690");
+
+		// domicilio a JSONObject
+		jo.put("domicilio", m);
+
+		// para los números de teléfono primero crear el JSONArray
+		JSONArray ja = new JSONArray();
+
+		m = new LinkedHashMap(2);
+		m.put("tipo", "casa");
+		m.put("numero", "666 666 666");
+		// añadiendo a la lista
+		ja.add(m);
+		m = new LinkedHashMap(2);
+		m.put("tipo", "movil");
+		m.put("numero", "777 777 777");
+		// añadiendo a la lista
+		ja.add(m);
+
+		// añadiendo los números de teléfono al JSONObject
+		jo.put("numerosTelefonos", ja);
+
+		// Escribiendo el:"profesor.json" in cwd
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter("profesor.json");
+			pw.write(jo.toJSONString());
+			pw.flush();
+			pw.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	
 }

@@ -13,9 +13,14 @@ public class App
     public static void main( String[] args )
     {
         //JsonUtils.leerJsonDesdeFichero("C:/ficheros/profesor.json");
+    	// Leer con Json simple desde Internet
+    	/*
         publicaciones = JsonUtils.leerPostsInternet("https://jsonplaceholder.typicode.com/posts");
         publicaciones.stream()
         .filter(e->e.getId()%2==0)  // publicaciones pares        
         .forEach(e->System.out.println(e));
+        */
+    	// Escribir con Json Simple
+    	JsonUtils.escribirJsonSimple();
     }
 }
