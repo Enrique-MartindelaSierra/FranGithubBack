@@ -3,6 +3,7 @@ package com.fran.json;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fran.json.entidades.People;
 import com.fran.json.entidades.Posts;
 import com.fran.json.utilidades.JsonUtils;
 
@@ -21,6 +22,15 @@ public class App
         .forEach(e->System.out.println(e));
         */
     	// Escribir con Json Simple
-    	JsonUtils.escribirJsonSimple();
+    	//JsonUtils.escribirJsonSimple();
+    	
+    	// leer Personaje con gson
+    	/*
+    	People luke = JsonUtils.leerPersonaje("https://swapi.dev/api/people/1?format=json");
+    	System.out.println(luke);
+    	*/
+    	// devolver lista de personajes
+    	List<People> personajes1al10 = JsonUtils.leerPersonajes("https://swapi.dev/api/people/", 1, 10, "?format=json");
+    	personajes1al10.forEach(e->System.out.println(e));
     }
 }

@@ -15,7 +15,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.fran.json.entidades.People;
 import com.fran.json.entidades.Posts;
+import com.google.gson.Gson;
 
 public class JsonUtils {
 	
@@ -161,6 +163,16 @@ public class JsonUtils {
 
 	}
 	
+	public static People leerPersonaje(String url) {		
+		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
+	}
 	
+	public static List<People> leerPersonajes(String comienzoCadena, int numInicio, int numFin, String finCadena){
+		List<People> resultado = new ArrayList<People>();
+		for(int i=numInicio;i<=numFin;i++) {
+			resultado.add(leerPersonaje(comienzoCadena + i + finCadena));
+		}
+		return resultado;
+	}
 	
 }
