@@ -20,6 +20,7 @@ import com.fran.json.entidades.Films;
 import com.fran.json.entidades.People;
 import com.fran.json.entidades.Posts;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class JsonUtils {
 	
@@ -165,10 +166,12 @@ public class JsonUtils {
 
 	}
 	
+	// Deprecated
 	public static People leerPersonaje(String url) {		
 		return new Gson().fromJson(InternetUtils.readUrl(url), People.class);
 	}
 	
+	// Deprecated
 	public static Films leerFilm(String url) {		
 		return new Gson().fromJson(InternetUtils.readUrl(url), Films.class);
 	}
@@ -177,6 +180,11 @@ public class JsonUtils {
 		return new Gson().fromJson(InternetUtils.readUrl(url), clase);
 	}
 	
+	public static <T> T leerObjetoConToken(String url,String token, Class<T> clase) {
+		return new Gson().fromJson(InternetUtils.readUrl(url,token), clase);
+	}
+	
+	// Deprecated
 	public static List<People> leerPersonajes(String comienzoCadena, int numInicio, int numFin, String finCadena){
 		List<People> resultado = new ArrayList<People>();
 		for(int i=numInicio;i<=numFin;i++) {
@@ -193,8 +201,37 @@ public class JsonUtils {
 		return resultado;
 	}
 	
+	/**
+	 * Método genérico que dada una url con un json donde se encuentra un array de objetos
+	 * devuelve una lista de este tipo de objetos que contiene todos los objetos del array.
+	 * Ejemplo de llamada: JsonUtils.devolverArrayGsonGenerico("https://jsonplaceholder.typicode.com/posts",Posts[].class);
+	 * @param <T> Nombre de la clase genérica
+	 * @param url Url de la web donde está el array en formato json
+	 * @param clase Array de elementos del tipo de la clase
+	 * @return Lista de elementos de esa clase
+	 */
 	public static <T> List<T> devolverArrayGsonGenerico(String url, Class<T[]> clase){
 		return Arrays.asList(new Gson().fromJson(InternetUtils.readUrl(url), clase));
+	}
+	
+	/**
+	 * Creamos un String con un json a partir de un objeto
+	 * @param <T> tipo del objeto
+	 * @param object nombre de la variable
+	 * @return String con el Json devuelto
+	 */
+	public static <T> String crearJson(T object) {
+		return new Gson().toJson(object);
+	}
+	
+	/**
+	 * Creamos un String con un json en formato amigable a partir de un objeto
+	 * @param <T> tipo del objeto
+	 * @param object nombre de la variable
+	 * @return String con el Json devuelto
+	 */
+	public static <T> String crearJsonPretty(T object) {
+		return new GsonBuilder().setPrettyPrinting().create().toJson(object);
 	}
 	
 }
