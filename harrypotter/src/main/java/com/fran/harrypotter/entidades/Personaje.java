@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+// https://hp-api.onrender.com/api/characters
 public class Personaje {
 	
 	private String id;
@@ -15,7 +17,7 @@ public class Personaje {
 	private String gender;
 	private String house;
 	private String dateOfBirth;
-	private LocalDate dateOfBirthLD;
+	private transient LocalDate dateOfBirthLD;
 	private Integer yearOfBirth;
 	private Boolean wizard;
 	private String ancestry;
