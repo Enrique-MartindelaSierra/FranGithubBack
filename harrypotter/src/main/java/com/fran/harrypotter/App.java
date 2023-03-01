@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fran.harrypotter.entidades.Personaje;
 import com.fran.harrypotter.utilidades.JsonUtils;
+import com.fran.harrypotter.utilidades.SerializacionUtils;
 
 public class App 
 {
@@ -14,6 +15,7 @@ public class App
 	
     public static void main( String[] args )
     {
+    	// Obtener los datos de la API
         personajes = JsonUtils.devolverArrayGsonGenerico("https://hp-api.onrender.com/api/characters", Personaje[].class);
         personajes.stream()
         .filter(e->e.getName().equals("Harry Potter"))
@@ -28,6 +30,13 @@ public class App
         })
         .filter(e->e.getName().equals("Harry Potter"))
         .forEach(e->System.out.println(e));
+        
+        // Probamos la serialización
+        if(SerializacionUtils.serializarListaObjetos("personajes.dat", personajes)) {
+        	System.out.println("La serialización fue satisfactoria");
+        } else {
+        	System.out.println("La serialización falló");
+        }
     
     }
 }
