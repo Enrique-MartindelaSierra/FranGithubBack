@@ -1,5 +1,9 @@
 package com.fran.harrypotter;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +16,10 @@ import com.fran.harrypotter.utilidades.SerializacionUtils;
 public class App 
 {
 	static List<Personaje> personajes = new ArrayList<Personaje>();
+	final static String URI = "jdbc:mysql://localhost:3306/harry_potter";
+	final static String USER = "root";
+	final static String PASSWORD = "";
+	public static Connection con;
 	
 	public static void ejemploSerializar() {
 		// Probamos la serialización
@@ -49,13 +57,61 @@ public class App
 		personajes.forEach(e->System.out.println(e));
 	}
 	
+	public static void probarConexion() {
+		con = null;
+		try {
+			con = DriverManager.getConnection(URI, USER, PASSWORD);
+			System.out.println("La conexión se realizó correctamente");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Fallo en la conexión");
+		}
+	}
+	
+	public static void poblarBbdd() {
+		
+		Statement st;
+		String sql = "";
+		con = null;
+		try {
+			con = DriverManager.getConnection(URI, USER, PASSWORD);
+			st = con.createStatement();
+			
+			for(Personaje personaje : personajes) {
+				sql = "INSERT INTO personaje(id,name) VALUES('" +
+						personaje.getId() + "','" +
+						personaje.getName() +
+					"');";
+				System.out.println(sql);
+				st.executeUpdate(sql);
+			}
+			
+			st.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Fallo en la conexión");
+		}
+	}
+	
     public static void main( String[] args )
     {
+    	// Proceso de Serialización
     	//obtenerDatosApi();
     	//rellenarFechaNacLD();       
         //ejemploSerializar();
-    	ejemploDesSerializar();
+    	
+    	// Proceso de DesSerialización
+    	//ejemploDesSerializar();
+    	//rellenarFechaNacLD();
+    	//mostrarPersonajes();
+    	
+    	// Proceso de Carga en BBDD
+    	// probarConexion();  // Prueba la conexión con la base de datos
+    	obtenerDatosApi();
     	rellenarFechaNacLD();
-    	mostrarPersonajes();
+    	poblarBbdd();
+    	
     }
 }
