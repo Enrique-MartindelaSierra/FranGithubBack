@@ -90,4 +90,36 @@ public class JdbcUtils {
 		return resultado;
 	}
 	
+	/**
+	 * Dada una sentencia sql devuelve un ResultSet con el contenido de los datos solicitados
+	 * @param sql. Sentencia SELECT que solicita información
+	 * @return ResultSet con los resultados o NULL si la sql es incorrecta
+	 */
+	public static ResultSet devolverResultSet(String sql) {
+		try {
+			st = con.createStatement();  
+			return st.executeQuery(sql);   			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
+	/**
+	 * Dada una sentencia de modificación de datos (Insert, Update o Delete)
+	 * la ejecuta sobre la Base de Datos y me devuelve el número de registros afectados
+	 * @param sql Sentencia de modificación
+	 * @return Número de registros afectados. En caso de error devolveré -1.
+	 */
+	public static int statementDML(String sql) {
+		try {
+			st = con.createStatement();  
+			return st.executeUpdate(sql);   			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	
 }
