@@ -53,4 +53,18 @@ public class Autores implements java.io.Serializable {
 		this.libroses = libroses;
 	}
 
+	@Override
+	public String toString() {
+		String resultado = "Código: " + cod + "\nNombre: " + nombre;
+		resultado += (libroses.size()>0?"\nHa escrito: ":"\nNo ha escrito ningún libro");
+		if(libroses.size()>0) {
+			for(Libros l : libroses) {
+				resultado += "\n" + l.getTitulo();
+			}
+		}					
+		return resultado;
+	}
+	
+	
+
 }
