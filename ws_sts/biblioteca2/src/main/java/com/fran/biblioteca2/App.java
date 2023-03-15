@@ -27,6 +27,11 @@ public class App
         }
 	}
 	
+	public static void closeSession() {
+		sessionFactory.close();
+		session.close();
+	}
+	
 	public static void mostrarLibros() {
 		List<Libros> libros = session.createSelectionQuery("from Libros",Libros.class).list();
 		//List<Libros> libros2 = session.createQuery("from Libros").list();
@@ -44,13 +49,38 @@ public class App
 		 Autores autor = new Autores(cod,nombre,libros);
 		 session.persist(autor);  // antiguo save
 		 trans.commit();  // confirmo los cambios en la transacción
+		 session.clear();
 	}
 	
 	public static void anyadirLibro(int id, Autores autor, String nombre) {
 		Transaction trans = session.beginTransaction();  // abro la transacción
 		session.persist(new Libros(id,autor,nombre));  // antiguo save
 		trans.commit();  // confirmo los cambios en la transacción
+		session.clear();  // Para que coja los datos de los set en tiempo real.
+	}
+	
+	public static void updateAutor(String nombreAntiguo, String nombreNuevo) {
+		// Busco que quiero actualizar
+		List<Autores> autores = session.createSelectionQuery("from Autores where nombre='" + nombreAntiguo + "'",Autores.class).list();
+		Transaction trans = session.beginTransaction();
+		autores.forEach(e->{
+			e.setNombre(nombreNuevo);
+			session.merge(e);  // Hibernate <6.0 era update
+		});  // Me actualiza los nombres en todos los resultados		
+		trans.commit();
 		session.clear();
+	}
+	
+	public static void deleteLibro(int id) {
+		List<Libros> libros = session.createSelectionQuery("from Libros where id=" + id ,Libros.class).list();
+		if(libros.size()>0) {  // Ha encontrado el libro con esa ID
+			Transaction trans = session.beginTransaction();
+			session.remove(libros.get(0));  // Hibernate <6.0 era delete
+			trans.commit();
+			session.clear();
+		} else {
+			System.out.println("No existe ese id a borrar");
+		}
 	}
 	
     public static void main( String[] args )
@@ -60,7 +90,12 @@ public class App
     	//mostrarLibros();
     	//mostrarAutores();
     	//anyadirAutor("AAAAA","Nombre de prueba",new HashSet<Libros>(0));
-    	anyadirLibro(9,new Autores("WSHAK"),"Libro 9");
+    	//anyadirLibro(9,new Autores("WSHAK"),"Libro 9");
+    	//mostrarLibros();
+    	//updateAutor("Nombre de prueba","Nombre actualizado");
+    	//mostrarAutores();
+    	deleteLibro(7);
     	mostrarLibros();
+    	closeSession();
     }
 }
