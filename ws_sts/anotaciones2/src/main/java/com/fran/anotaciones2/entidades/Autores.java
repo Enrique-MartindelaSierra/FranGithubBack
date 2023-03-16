@@ -68,4 +68,12 @@ public class Autores implements java.io.Serializable {
 		this.libroses = libroses;
 	}
 
+	@Override
+	public String toString() {
+		return "Cod: " + cod + " Nombre: " + nombre;
+	}
+	
+	
+	
+
 }

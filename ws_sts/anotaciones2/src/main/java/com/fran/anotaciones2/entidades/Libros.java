@@ -69,4 +69,12 @@ public class Libros implements java.io.Serializable {
 		this.autoreses = autoreses;
 	}
 
+	@Override
+	public String toString() {
+		return "Id: " + id + " titulo: " + titulo;
+	}
+	
+	
+	
+
 }

@@ -1,13 +1,20 @@
 package com.fran.anotaciones2;
 
-/**
- * Hello world!
- *
- */
+import com.fran.anotaciones2.utilidades.HibernateUtils;
+
 public class App 
 {
+	
+	public static void mostrarLibros() {
+		HibernateUtils.openSession();
+		HibernateUtils.devolverListaObjetos("Libros").forEach(e->System.out.println(e));
+	}
+	
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.SEVERE);
+    	mostrarLibros();
+    	
+    	
     }
 }
