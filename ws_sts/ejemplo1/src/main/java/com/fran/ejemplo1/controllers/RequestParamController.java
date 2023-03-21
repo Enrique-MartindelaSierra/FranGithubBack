@@ -29,7 +29,7 @@ public class RequestParamController {
 	@GetMapping("/dosparametros") // http://localhost:8080/params/dosparametros?param1=hola&param2=5
 	public String dosp(@RequestParam String param1, @RequestParam Integer param2, Map<String,Object> map) {
 		map.put("titulo", "Ejemplo Param");
-		map.put("contenidoh1", "El texto del primer parámetro es : " + param1 + " ye el del segundo + 1 es " + (param2+1));
+		map.put("contenidoh1", "El texto del primer parámetro es : " + param1 + " y el del segundo + 1 es: " + (param2+1));
 		return "params/dosp";
 	}
 	
