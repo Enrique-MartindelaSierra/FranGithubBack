@@ -13,7 +13,7 @@ import com.fran.springboot.backend.eventos.models.services.IeventoService;
 
 @CrossOrigin(origins= {"*"})  // Todas las aplicaciones pueden acceder a los servicios web
 @RestController
-@RequestMapping("/api/eventos")
+@RequestMapping("/eventos")
 public class EventoRestController {
 	
 	@Autowired

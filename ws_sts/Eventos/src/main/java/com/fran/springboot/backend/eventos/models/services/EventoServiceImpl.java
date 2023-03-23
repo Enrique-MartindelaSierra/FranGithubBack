@@ -6,18 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fran.springboot.backend.eventos.models.dao.IeventoDao;
 import com.fran.springboot.backend.eventos.models.entity.Evento;
 
 @Service
 public class EventoServiceImpl implements IeventoService{
 	
 	@Autowired
-	private IeventoService eventoService;
+	private IeventoDao eventoDao;
 
 	@Override
 	@Transactional(readOnly=true)
 	public List<Evento> findAll() {
-		return (List<Evento>)eventoService.findAll();
+		return (List<Evento>)eventoDao.findAll();
 	}
 
 }
