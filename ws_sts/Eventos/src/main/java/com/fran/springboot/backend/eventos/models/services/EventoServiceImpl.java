@@ -27,4 +27,16 @@ public class EventoServiceImpl implements IeventoService{
 		return eventoDao.findById(id).orElse(null);
 	}
 
+	@Override
+	@Transactional
+	public void delete(int id) {
+		eventoDao.deleteById(id);		
+	}
+
+	@Override
+	@Transactional
+	public Evento save(Evento cliente) {
+		return eventoDao.save(cliente);
+	}
+
 }

@@ -8,5 +8,8 @@ public interface IeventoService {
 	
 	public List<Evento> findAll();
 	public Evento findById(int id);
+	public void delete(int id);  // Delete (Borrado)
+	public Evento save(Evento evento);  // Vale para POST y para PUT (Inserción y actualización)
+
 
 }
