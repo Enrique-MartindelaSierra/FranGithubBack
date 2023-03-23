@@ -6,7 +6,11 @@ package com.fran.springboot.backend.eventos.models.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,6 +35,7 @@ public class Evento implements java.io.Serializable {
 	private String descripcion;
 	private BigDecimal precio;
 	private Date fecha;
+	@JsonIgnore
 	private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
 	public Evento() {
@@ -112,5 +117,30 @@ public class Evento implements java.io.Serializable {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+
+	@Override
+	public String toString() {
+		return "Evento [id=" + id + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Evento other = (Evento) obj;
+		return id == other.id;
+	}
+	
+	
+	
 
 }

@@ -5,6 +5,9 @@ package com.fran.springboot.backend.eventos.models.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,6 +30,7 @@ public class Usuario implements java.io.Serializable {
 	private String usuario;
 	private String password;
 	private DatosUsuario datosUsuario;
+	@JsonIgnore
 	private Set<Evento> eventos = new HashSet<Evento>(0);
 
 	public Usuario() {
