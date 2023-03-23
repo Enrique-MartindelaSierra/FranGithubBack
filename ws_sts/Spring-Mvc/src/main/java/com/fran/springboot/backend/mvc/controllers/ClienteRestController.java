@@ -150,7 +150,7 @@ public class ClienteRestController {
 	
 	
 	
-	
+	/*
 	@PutMapping("/clientes/{id}")  // actualiza un cliente
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente update(@RequestBody Cliente cliente,@PathVariable Long id) {
@@ -159,6 +159,56 @@ public class ClienteRestController {
 		clienteActualizar.setApellido(cliente.getApellido());
 		clienteActualizar.setEmail(cliente.getEmail());
 		return clienteService.save(clienteActualizar); // Guardo la nueva información
+	}*/
+	
+	@PutMapping("/clientes/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, @PathVariable Long id, BindingResult result){
+		
+		Cliente clienteActual = null;
+		Cliente clienteUpdated = null;
+		Map<String,Object> response = new HashMap<>();
+		
+		if(result.hasErrors()) {
+
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '" + err.getField() +"' "+ err.getDefaultMessage())
+					.collect(Collectors.toList());
+			
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		try {
+			clienteActual = clienteService.findById(id); // El cliente puede existir o no
+		} catch (DataAccessException e) {  // Error al acceder a la base de datos
+			response.put("mensaje", "Error al conectar con la base de datos");
+			response.put("error", e.getMessage().concat(":")
+					.concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if(clienteActual==null) { // No existe en la base de datos
+			response.put("mensaje", "El cliente con ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		// Si llegamos aquí es que el cliente que queremos modificar SI existe
+		try {
+			clienteActual.setNombre(cliente.getNombre());
+			clienteActual.setApellido(cliente.getApellido());
+			clienteActual.setEmail(cliente.getEmail());
+			clienteUpdated = clienteService.save(clienteActual);
+		} catch (DataAccessException e) {  // Error al acceder a la base de datos
+			response.put("mensaje", "Error al conectar con la base de datos");
+			response.put("error", e.getMessage().concat(":")
+					.concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "El cliente se ha modificado correctamente");
+		response.put("cliente", clienteUpdated);
+		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
+
 	}
 	
 	
