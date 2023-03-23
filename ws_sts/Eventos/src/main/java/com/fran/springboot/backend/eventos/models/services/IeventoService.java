@@ -7,5 +7,6 @@ import com.fran.springboot.backend.eventos.models.entity.Evento;
 public interface IeventoService {
 	
 	public List<Evento> findAll();
+	public Evento findById(int id);
 
 }

@@ -21,4 +21,10 @@ public class EventoServiceImpl implements IeventoService{
 		return (List<Evento>)eventoDao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public Evento findById(int id) {
+		return eventoDao.findById(id).orElse(null);
+	}
+
 }
