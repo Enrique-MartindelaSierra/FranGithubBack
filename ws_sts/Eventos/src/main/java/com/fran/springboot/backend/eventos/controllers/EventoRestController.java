@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fran.springboot.backend.eventos.models.dto.EventoDto;
 import com.fran.springboot.backend.eventos.models.entity.Evento;
 import com.fran.springboot.backend.eventos.models.services.IeventoService;
 
@@ -38,6 +39,15 @@ public class EventoRestController {
 	public List<Evento> index(){
 		return eventoService.findAll();
 	}*/
+	
+	@GetMapping("/dto")
+	public List<EventoDto> indexDto(){
+		List<EventoDto> listaDto = new  ArrayList<>();
+		eventoService.findAll().forEach(evento->{
+			listaDto.add(new EventoDto(evento.getId(),evento.getNombre(),evento.getDescripcion(),evento.getUsuarios()));
+		});		
+		return listaDto;
+	}
 	
 	
 	@GetMapping("")
@@ -130,7 +140,7 @@ public class EventoRestController {
 		}
 		
 		response.put("mensaje", "El evento se ha insertado correctamente");
-		response.put("cliente", nuevo);
+		response.put("evento", nuevo);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 	}
 	
@@ -181,7 +191,7 @@ public class EventoRestController {
 		}
 		
 		response.put("mensaje", "El evento se ha modificado correctamente");
-		response.put("cliente", eventoUpdated);
+		response.put("evento", eventoUpdated);
 		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.CREATED);
 
 	}
