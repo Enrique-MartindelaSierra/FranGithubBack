@@ -60,8 +60,9 @@ public class Evento implements java.io.Serializable {
 		this.fecha = fecha;
 		this.usuarios = usuarios;
 	}
-	
 
+	
+	
 	public Evento(int id, String nombre, String descripcion, BigDecimal precio, LocalDate fecha, Set<Usuario> usuarios,
 			String imagen) {
 		super();
@@ -74,17 +75,6 @@ public class Evento implements java.io.Serializable {
 		this.imagen = imagen;
 	}
 	
-
-	public Evento(int id, String nombre, String descripcion, BigDecimal precio, LocalDate fecha, String imagen) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.fecha = fecha;
-		this.imagen = imagen;
-	}
-	
 	public Evento(Evento e) {
 		super();
 		this.id = e.id;
@@ -94,7 +84,6 @@ public class Evento implements java.io.Serializable {
 		this.fecha = e.fecha;
 		this.imagen = e.imagen;
 	}
-	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -156,6 +145,10 @@ public class Evento implements java.io.Serializable {
 		this.usuarios = usuarios;
 	}
 	
+	
+	
+	
+
 	public String getImagen() {
 		return imagen;
 	}
