@@ -26,7 +26,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.fran.springboot.backend.eventos.models.dto.EventoDto;
 import com.fran.springboot.backend.eventos.models.entity.Evento;
 import com.fran.springboot.backend.eventos.models.services.IeventoService;
-import com.fran.springboot.backend.eventos.utilidades.ImageUtils;
 
 
 @CrossOrigin(origins= {"*"})  // Todas las aplicaciones pueden acceder a los servicios web
@@ -36,9 +35,6 @@ public class EventoRestController {
 	
 	@Autowired
 	private IeventoService eventoService;
-	
-	private final ImageUtils imageUtils = new ImageUtils();
-	
 	/*
 	@GetMapping("")
 	public List<Evento> index(){
@@ -64,14 +60,13 @@ public class EventoRestController {
 		try {
 			respuesta = eventoService.findAll()
 					.stream()
-					.map(e->{  // construimos una nueva lista con el campo imagen con la ruta completa
-						Evento evento = new Evento(e);
-						if(evento.getImagen()!=null) {  // Para devolverle al front la ruta completa de la imagen
-							evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());
-						}
-						return evento;						
-					})
-					.collect(Collectors.toList());
+		            .map(e -> {
+		                Evento evento = new Evento(e);
+		                if(evento.getImagen()!=null)
+		                	evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());
+		                return evento;
+		            })
+		            .collect(Collectors.toList());
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")
@@ -106,8 +101,9 @@ public class EventoRestController {
 			response.put("mensaje", "El evento con ID: ".concat(id+"").concat(" no existe"));
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
-		if(evento.getImagen()!=null)
-			evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());	
+        if(evento.getImagen()!=null) // si el evento tiene imagen
+        	evento.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + evento.getImagen());
+
 		// ha encontrado el cliente
 		return new ResponseEntity<Evento>(evento,HttpStatus.OK);		
 	}
@@ -120,25 +116,23 @@ public class EventoRestController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id){
+		Evento evento = null;
 		Map<String,Object> response = new HashMap<>();
-		Evento eventoActual = null;
 		try {
-			eventoActual = eventoService.findById(id); // El evento puede existir o no
-			if(eventoActual!=null) {
-				eventoService.delete(id);
-				response.put("mensaje", "El evento se ha borrado correctamente");
-				return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
-			}			
+			evento = eventoService.findById(id);
+			eventoService.delete(id);
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al eliminar el id");
 			response.put("error", e.getMessage().concat(":")
 					.concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 		}
-		// No existe el id en la base de datos
-		response.put("mensaje", "El evento no existe en la base de datos");
-		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
-		
+		if(evento==null) {  // no existe el id de cliente
+			response.put("mensaje", "El evento con ID: ".concat(id+"").concat(" no existe"));
+			return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
+		}
+		response.put("mensaje", "El evento se ha borrado correctamente");
+		return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
 	}
 	
 	/*
@@ -156,9 +150,8 @@ public class EventoRestController {
 					
 		try {
 			nuevo = eventoService.save(evento);
-			if(evento.getImagen()!=null) {  // Para devolverle al front la ruta completa de la imagen
+			if(evento.getImagen()!=null)
 				nuevo.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + nuevo.getImagen());
-			}
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")
@@ -191,7 +184,7 @@ public class EventoRestController {
 		Map<String,Object> response = new HashMap<>();
 			
 		try {
-			eventoActual = eventoService.findById(id); // El evento puede existir o no
+			eventoActual = eventoService.findById(id); // El cliente puede existir o no
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")
@@ -209,16 +202,11 @@ public class EventoRestController {
 			eventoActual.setDescripcion(evento.getDescripcion());
 			eventoActual.setPrecio(evento.getPrecio());
 			eventoActual.setFecha(evento.getFecha());
-			if(eventoActual.getImagen()!=null) // El evento a modificar ya tenía una imagen, la elimino del disco duro
-				imageUtils.deleteImage("public", eventoActual.getImagen());
-			if(evento.getImagen()!=null)  // Me la guarda en bbdd si existe
+			if(evento.getImagen()!=null)
 				eventoActual.setImagen(evento.getImagen());
-			else  // Si viene sin imagen, pone la imagen a null
-				eventoActual.setImagen(null);
 			eventoUpdated = eventoService.save(eventoActual);
-			if(evento.getImagen()!=null) {  // Para devolverle al front la ruta completa de la imagen
+			if(evento.getImagen()!=null)
 				eventoUpdated.setImagen(ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/" + eventoUpdated.getImagen());
-			}
 		} catch (DataAccessException e) {  // Error al acceder a la base de datos
 			response.put("mensaje", "Error al conectar con la base de datos");
 			response.put("error", e.getMessage().concat(":")

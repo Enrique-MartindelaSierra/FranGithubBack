@@ -34,16 +34,4 @@ public class ImageUtils {
 			return "";
 		}
 	}
-	
-	public boolean deleteImage(String dir, String nombre) {
-		try {
-			Path path = Paths.get(dir, nombre);
-			Files.deleteIfExists(path);
-			return true;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}		
-	}
 }
