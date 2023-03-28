@@ -1,5 +1,7 @@
 package com.fran.springboot.backend.eventos.models.services;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,19 @@ public class EventoServiceImpl implements IeventoService{
 	@Override
 	@Transactional
 	public void delete(int id) {
-		eventoDao.deleteById(id);		
+		Evento eventoActual = eventoDao.findById(id).orElse(null);
+		if(eventoActual!=null) {
+			if(eventoActual.getImagen()!=null) {
+				// borrado del fichero de la imagen
+				imageUtils.deleteImage("public", eventoActual.getImagen());
+			}
+			eventoDao.deleteById(id);
+		}
 	}
 
 	@Override
 	@Transactional
-	public Evento save(Evento evento) {
+	public Evento save(Evento evento) {		
 		if(evento.getImagen()!=null) {  // me envían imagen desde el front
 			String ruta = imageUtils.saveImageBase64("eventos", evento.getImagen());
 			evento.setImagen(ruta);
@@ -47,5 +56,6 @@ public class EventoServiceImpl implements IeventoService{
 		}
 		return eventoDao.save(evento);  // actualización sobre la base de datos
 	}
+	
 
 }
